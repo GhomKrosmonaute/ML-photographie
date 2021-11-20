@@ -1,0 +1,18 @@
+{
+  "main": "dist/main.js",
+  "prettier": {
+    "semi": false
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write src",
+    "start": "tsc && node .",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    // typescript
+  },
+  "dependencies": {
+    // knex, sqlite3, koa
+  }
+}
