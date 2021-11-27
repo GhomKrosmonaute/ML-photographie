@@ -10,9 +10,11 @@
     "watch": "tsc --watch"
   },
   "devDependencies": {
-    // typescript
+    "typescript": "^4.5.2"
   },
   "dependencies": {
-    // knex, sqlite3, koa
+    "knex": "^0.95.14",
+    "sqlite3" : "^5.0.2",
+    "koa": "^2.13.4"
   }
 }
