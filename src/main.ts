@@ -4,6 +4,7 @@ import cors from "cors"
 import path from "path"
 import express from "express"
 import session from "express-session"
+import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 
 import * as database from "./app/database"
@@ -24,6 +25,7 @@ export const app = express()
   .set("view engine", "ejs")
   .use(
     cors(),
+    bodyParser(),
     cookieParser(),
     session({ secret: process.env.ML_SESSION_SECRET as string })
   )
@@ -48,7 +50,7 @@ export const app = express()
 
     req.session.admin = true
 
-    res.sendStatus(200)
+    res.render("pages/home", { admin: true })
   })
   .get("/admin", (req, res) => {
     if (!req.session.admin)

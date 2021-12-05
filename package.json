@@ -18,6 +18,7 @@
     "watch.start": "nodemon dist/main.js"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.12",
     "@types/ejs": "^3.1.0",
@@ -28,6 +29,7 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

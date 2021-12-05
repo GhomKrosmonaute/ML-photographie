@@ -1,3 +1,10 @@
 <%- include('../partials/head'); %>
 
+<% if(admin) { %>
+    <a href="/admin"> Administration </a>
+    <a href="/logout"> Se déconnecter </a>
+<% } else { %>
+    <a href="/login"> Se connecter </a>
+<% } %>
+
 <h1> <%= site.name %> </h1>

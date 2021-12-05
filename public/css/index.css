@@ -5,3 +5,13 @@
   border: 0;
   box-sizing: border-box;
 }
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px;
+}
+
+a:hover {
+  text-decoration: none;
+}
