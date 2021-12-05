@@ -1,0 +1,32 @@
+.colors {
+  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.colors > div {
+  width: 20vw;
+  height: 10px;
+}
+
+.colors > div:first-child {
+  background-color: var(--COLOR_1);
+}
+
+.colors > div:nth-child(2) {
+  background-color: var(--COLOR_2);
+}
+
+.colors > div:nth-child(3) {
+  background-color: var(--COLOR_3);
+}
+
+.colors > div:nth-child(4) {
+  background-color: var(--COLOR_4);
+}
+
+.colors > div:last-child {
+  background-color: var(--COLOR_5);
+}

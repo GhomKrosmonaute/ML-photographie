@@ -1,10 +1,23 @@
 <%- include('../partials/head'); %>
 
-<a href="/"> Accueil </a>
+<body style="overflow: hidden">
+    <%- include('../partials/colors') %>
 
-<h1> Login </h1>
-<form action="/login" method="post">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
-    <input type="submit" value="Login">
-</form>
+    <div id="title" class="section">
+        <img src="<%- site.banner %>" alt="website banner">
+
+        <div></div>
+
+        <ul>
+            <li><a href="/"> Accueil </a></li>
+        </ul>
+
+        <h1 style="padding-bottom: 200px"> Connection </h1>
+
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>

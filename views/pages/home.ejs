@@ -1,14 +1,16 @@
 <%- include('../partials/head'); %>
 
 <body style="overflow: hidden">
-    <div id="title">
+    <%- include('../partials/colors') %>
+
+    <div id="title" class="section">
         <img src="<%- site.banner %>" alt="website banner">
 
         <div></div>
 
         <ul>
             <li><a href="/#gallery"> Gallerie </a></li>
-            <li><a href="/about"> A propos </a></li>
+            <li><a href="/#about"> A propos </a></li>
             <% if(admin) { %>
                 <li><a href="/admin"> Administration </a></li>
                 <li><a href="/logout"> Se déconnecter </a></li>
@@ -19,21 +21,26 @@
 
         <h1> <%= site.name %> </h1>
 
-        <i onclick="scrollToGallery()" class="fas fa-sort-down"></i>
+        <a class=next href="/#gallery"><i class="fas fa-sort-down"></i></a>
     </div>
 
-    <div id=gallery>
-        <i onclick="scrollToTitle()" class="fas fa-sort-up"></i>
+    <div id=gallery class="section">
+        <a class=prev href="/#title"><i class="fas fa-sort-up"></i></a>
+        <a class=next href="/#about"><i class="fas fa-sort-down"></i></a>
+    </div>
+
+    <div id=about class="section">
+        <a class=prev href="/#gallery"><i class="fas fa-sort-up"></i></a>
     </div>
 
     <script>
-        function scrollToTitle() {
-            document.getElementById("title").scrollIntoView({ behavior: "smooth", block: "start" })
-        }
-
-        function scrollToGallery() {
-            document.getElementById("gallery").scrollIntoView({ behavior: 'smooth', block: 'end'});
-        }
+        // function scrollToTitle() {
+        //     document.getElementById("title").scrollIntoView({ behavior: "smooth", block: "start" })
+        // }
+        //
+        // function scrollToGallery() {
+        //     document.getElementById("gallery").scrollIntoView({ behavior: 'smooth', block: 'end'});
+        // }
     </script>
 </body>
 

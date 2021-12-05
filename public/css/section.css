@@ -1,0 +1,25 @@
+.section {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+}
+
+.section > .prev,
+.section > .next {
+  color: var(--COLOR_3);
+  position: absolute;
+  z-index: 3;
+  font-size: 40px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  left: 50vw;
+}
+
+.section > .prev {
+  top: 5vh;
+}
+
+.section > .next {
+  top: 95vh;
+}
