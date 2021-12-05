@@ -1,0 +1,17 @@
+#gallery {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  background: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0));
+}
+
+#gallery > i {
+  color: var(--COLOR_3);
+  position: absolute;
+  z-index: 3;
+  font-size: 40px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  left: 50vw;
+  top: 105vh;
+}

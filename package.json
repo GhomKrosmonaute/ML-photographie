@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write src",
+    "format": "prettier --write src public",
     "start": "tsc && node dist/main.js",
     "watch.build": "tsc --watch",
     "watch.start": "nodemon dist/main.js"

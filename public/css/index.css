@@ -1,29 +1,4 @@
+@import "defaults.css";
 @import "injection.css";
-
-* {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: var(--COLOR_5);
-}
-
-a {
-  color: var(--COLOR_2);
-  text-decoration: none;
-  display: inline-block;
-  margin: 10px;
-}
-
-a:hover {
-  color: var(--COLOR_3);
-  text-decoration: none;
-}
-
-h1 {
-  color: var(--COLOR_1);
-}
+@import "title.css";
+@import "gallery.css";

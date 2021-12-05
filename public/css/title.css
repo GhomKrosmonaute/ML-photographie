@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Gwendolyn:wght@700&display=swap");
+
+#title > h1 {
+  z-index: 3;
+  pointer-events: none;
+  text-align: center;
+  font-family: "Gwendolyn", cursive;
+  position: absolute;
+  color: var(--COLOR_5);
+  font-size: 70px;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+}
+
+#title > h1::selection {
+  background: none;
+  content: "";
+}
+
+#title > img {
+  z-index: 1;
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+}
+
+#title > ul {
+  z-index: 3;
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#title > ul > li > a {
+  color: var(--COLOR_1);
+  /*background-color: rgba(0,0,0, 30%);*/
+  text-align: center;
+  font-size: 20px;
+  width: 200px;
+  margin-top: 20px;
+  transition: all 500ms;
+}
+
+#title > ul > li > a:hover {
+  color: #000;
+  /*background-color: rgba(0,0,0, 40%);*/
+}
+
+#title > div {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to top,
+    #000,
+    rgba(0, 0, 0, 50%) 50%,
+    rgba(0, 0, 0, 0),
+    rgba(255, 255, 255, 50%)
+  );
+}
+
+#title > i {
+  color: var(--COLOR_3);
+  position: absolute;
+  z-index: 3;
+  font-size: 40px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  left: 50vw;
+  top: 95vh;
+}

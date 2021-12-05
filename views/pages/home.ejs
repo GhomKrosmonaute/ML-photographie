@@ -1,10 +1,41 @@
 <%- include('../partials/head'); %>
 
-<% if(admin) { %>
-    <a href="/admin"> Administration </a>
-    <a href="/logout"> Se déconnecter </a>
-<% } else { %>
-    <a href="/login"> Se connecter </a>
-<% } %>
+<body style="overflow: hidden">
+    <div id="title">
+        <img src="<%- site.banner %>" alt="website banner">
 
-<h1> <%= site.name %> </h1>
+        <div></div>
+
+        <ul>
+            <li><a href="/#gallery"> Gallerie </a></li>
+            <li><a href="/about"> A propos </a></li>
+            <% if(admin) { %>
+                <li><a href="/admin"> Administration </a></li>
+                <li><a href="/logout"> Se déconnecter </a></li>
+            <% } else { %>
+                <li><a href="/login"> Se connecter </a></li>
+            <% } %>
+        </ul>
+
+        <h1> <%= site.name %> </h1>
+
+        <i onclick="scrollToGallery()" class="fas fa-sort-down"></i>
+    </div>
+
+    <div id=gallery>
+        <i onclick="scrollToTitle()" class="fas fa-sort-up"></i>
+    </div>
+
+    <script>
+        function scrollToTitle() {
+            document.getElementById("title").scrollIntoView({ behavior: "smooth", block: "start" })
+        }
+
+        function scrollToGallery() {
+            document.getElementById("gallery").scrollIntoView({ behavior: 'smooth', block: 'end'});
+        }
+    </script>
+</body>
+
+
+
