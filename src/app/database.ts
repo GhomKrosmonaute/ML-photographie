@@ -4,7 +4,7 @@ import fs from "fs"
 
 const dbPath = path.join(__dirname, "..", "..", "data")
 
-if(!fs.existsSync(dbPath)) fs.mkdirSync(dbPath)
+if (!fs.existsSync(dbPath)) fs.mkdirSync(dbPath)
 
 export const db = knex({
   client: "sqlite3",

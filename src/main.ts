@@ -1,4 +1,6 @@
 import "dotenv/config"
+
+import fs from "fs"
 import ejs from "ejs"
 import cors from "cors"
 import path from "path"
@@ -18,6 +20,27 @@ declare module "express-session" {
 interface ConfigEntry {
   name: string
   value: string
+}
+
+// inject variables to CSS
+{
+  const injection = fs.readFileSync(
+    path.join(__dirname, "..", "templates", "injection.css"),
+    "utf-8"
+  )
+  fs.writeFileSync(
+    path.join(__dirname, "..", "public", "css", "injection.css"),
+    injection.replace(
+      "/* VARIABLES */",
+      Object.entries(process.env)
+        .filter(([name]) => name.startsWith("ML_CSS_"))
+        .map(([name, value]) => {
+          return `  ${name.replace("ML_CSS_", "--")}: ${value};`
+        })
+        .join("\n")
+    ),
+    "utf-8"
+  )
 }
 
 export const app = express()
