@@ -3,7 +3,8 @@ import path from "path"
 
 export const db = knex({
   client: "sqlite3",
+  useNullAsDefault: true,
   connection: {
-    filename: path.join(__dirname, "data.sql"),
+    filename: path.join(__dirname, "..", "..", "data", "data.sql"),
   },
 })
