@@ -30,6 +30,12 @@
     </div>
 
     <div id=gallery class="section">
+        <div class="image-wrapper">
+            <% for(const image of images){ %>
+
+            <% } %>
+        </div>
+
         <a class=prev href="/#title"><i class="fas fa-sort-up"></i></a>
         <a class=next href="/#about"><i class="fas fa-sort-down"></i></a>
     </div>
@@ -37,16 +43,6 @@
     <div id=about class="section">
         <a class=prev href="/#gallery"><i class="fas fa-sort-up"></i></a>
     </div>
-
-    <script>
-        // function scrollToTitle() {
-        //     document.getElementById("title").scrollIntoView({ behavior: "smooth", block: "start" })
-        // }
-        //
-        // function scrollToGallery() {
-        //     document.getElementById("gallery").scrollIntoView({ behavior: 'smooth', block: 'end'});
-        // }
-    </script>
 </body>
 
 

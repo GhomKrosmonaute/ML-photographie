@@ -2,3 +2,45 @@
   overflow-y: scroll;
   background: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0));
 }
+
+.image-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.image-wrapper img {
+  object-fit: cover;
+}
+.image-wrapper > * {
+  box-sizing: border-box;
+  padding: 2px;
+}
+
+@media (orientation: landscape) {
+  .image-wrapper > * {
+    height: 300px;
+  }
+  .image-wrapper > *:nth-child(5n + 2) {
+    width: 40%;
+  }
+  .image-wrapper > *:nth-child(5n + 1),
+  .image-wrapper > *:nth-child(5n + 3) {
+    width: 30%;
+  }
+  .image-wrapper > *:nth-child(5n + 4),
+  .image-wrapper > *:nth-child(5n + 5) {
+    width: 50%;
+  }
+}
+@media (orientation: portrait) {
+  .image-wrapper > * {
+    height: 200px;
+  }
+  .image-wrapper > *:nth-child(4n + 1),
+  .image-wrapper > *:nth-child(4n + 4) {
+    width: 40%;
+  }
+  .image-wrapper > *:nth-child(4n + 2),
+  .image-wrapper > *:nth-child(4n + 3) {
+    width: 60%;
+  }
+}
