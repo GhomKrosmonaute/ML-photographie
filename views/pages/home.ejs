@@ -30,9 +30,13 @@
     </div>
 
     <div id=gallery class="section">
+        <img src="<%- site.garden %>" alt="website garden">
+
+        <div class="gradient"></div>
+
         <div class="image-wrapper">
             <% for(const image of images){ %>
-
+                <%- include('../partials/image', { image }) %>
             <% } %>
         </div>
 

@@ -1,6 +1,5 @@
 import "dotenv/config"
 
-import fs from "fs"
 import ejs from "ejs"
 import cors from "cors"
 import path from "path"
@@ -16,27 +15,6 @@ declare module "express-session" {
   interface SessionData {
     admin: boolean
   }
-}
-
-// inject variables to CSS
-{
-  const injection = fs.readFileSync(
-    path.join(__dirname, "..", "templates", "injection.css"),
-    "utf-8"
-  )
-  fs.writeFileSync(
-    path.join(__dirname, "..", "public", "css", "injection.css"),
-    injection.replace(
-      "/* VARIABLES */",
-      Object.entries(process.env)
-        .filter(([name]) => name.startsWith("ML_CSS_"))
-        .map(([name, value]) => {
-          return `  ${name.replace("ML_CSS_", "--")}: ${value};`
-        })
-        .join("\n")
-    ),
-    "utf-8"
-  )
 }
 
 export const app = express()
@@ -56,10 +34,14 @@ app.listen(Number(process.env.ML_PORT ?? 3000))
 app.locals.site = {
   url: process.env.ML_SITE_URL,
 }
-;(async function setup() {
-  const config = await database.site().select()
 
-  for (const entry of config) app.locals.site[entry.name] = entry.value
+database.setup().then(() => {
+  database
+    .site()
+    .select()
+    .then((config) => {
+      for (const entry of config) app.locals.site[entry.name] = entry.value
 
-  console.log(app.locals.site)
-})()
+      console.log(app.locals.site)
+    })
+})

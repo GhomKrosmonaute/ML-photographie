@@ -8,7 +8,9 @@ interface ConfigEntry {
 }
 
 interface Image {
-  sellable: boolean
+  id: string
+  name: string
+  public: boolean
 }
 
 const dbPath = path.join(__dirname, "..", "..", "data")
@@ -31,7 +33,7 @@ export function site() {
   return db<ConfigEntry>("site")
 }
 
-;(async function setup() {
+export async function setup() {
   try {
     await db.schema.createTable("site", (table) => {
       table.string("name").notNullable()
@@ -42,14 +44,16 @@ export function site() {
       { name: "name", value: "Martial Lambert Photographie" },
       { name: "description", value: "Photographe" },
       { name: "banner", value: "/public/images/banner.jpg" },
+      { name: "garden", value: "/public/images/garden.jpg" },
     ])
   } catch (error) {}
 
   try {
     await db.schema.createTable("image", (table) => {
+      table.increments("id").primary()
       table.string("name").notNullable()
       table.string("category").notNullable()
       table.boolean("public").defaultTo(false)
     })
   } catch (error) {}
-})()
+}

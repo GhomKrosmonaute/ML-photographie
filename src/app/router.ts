@@ -1,18 +1,21 @@
 import * as express from "express"
 import * as database from "./database"
 
-const router = express
-  .Router()
-  .get("/logout", (req, res) => {
-    req.session.admin = false
+const router = express.Router()
 
-    res.redirect("/")
-  })
-  .get("/login", (req, res) => {
+router.get("/logout", (req, res) => {
+  req.session.admin = false
+
+  res.redirect("/")
+})
+
+router
+  .route("/login")
+  .get((req, res) => {
     if (req.session.admin) res.redirect("/admin")
     else res.render("pages/login")
   })
-  .post("/login", (req, res) => {
+  .post((req, res) => {
     if (
       !req.body.username ||
       !req.body.password ||
@@ -23,21 +26,23 @@ const router = express
 
     req.session.admin = true
 
-    res.render("pages/home", { admin: true })
+    res.redirect("/")
   })
-  .get("/admin", (req, res) => {
-    if (!req.session.admin)
-      return res
-        .status(401)
-        .send("VOus devez être connecté en tant qu'administrateur.")
 
-    res.render("pages/admin")
+router.get("/admin", (req, res) => {
+  if (!req.session.admin)
+    return res
+      .status(401)
+      .send("VOus devez être connecté en tant qu'administrateur.")
+
+  res.render("pages/admin")
+})
+
+router.get("/", async (req, res) => {
+  res.render("pages/home", {
+    admin: req.session.admin,
+    images: await database.image().select(),
   })
-  .get("/", async (req, res) => {
-    res.render("pages/home", {
-      admin: req.session.admin,
-      images: await database.image().where({}),
-    })
-  })
+})
 
 export default router
