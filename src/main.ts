@@ -102,6 +102,7 @@ app.locals.site = {
     await database.db<ConfigEntry>("site").insert([
       { name: "name", value: "Martial Lambert Photographie" },
       { name: "description", value: "Photographe" },
+      { name: "banner", value: "/public/images/banner.jpg" },
     ])
   } catch (error) {}
 

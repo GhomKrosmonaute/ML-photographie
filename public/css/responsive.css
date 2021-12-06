@@ -1,0 +1,13 @@
+.more-of-850 {
+  display: none;
+}
+
+@media screen and (min-width: 850px) {
+  .more-of-850 {
+    display: initial;
+  }
+
+  .less-of-850 {
+    display: none;
+  }
+}

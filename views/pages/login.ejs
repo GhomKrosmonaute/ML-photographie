@@ -4,7 +4,7 @@
     <%- include('../partials/colors') %>
 
     <div id="title" class="section">
-        <img src="<%- site.banner %>" alt="website banner">
+        <img src="<%- site.banner ?? "/public/images/banner.jpg" %>" alt="website banner">
 
         <div></div>
 
@@ -12,7 +12,7 @@
             <li><a href="/"> Accueil </a></li>
         </ul>
 
-        <h1 style="padding-bottom: 200px"> Connection </h1>
+        <h1 style="padding-bottom: 250px"> Connection </h1>
 
         <form action="/login" method="post">
             <input type="text" name="username" placeholder="Username">
