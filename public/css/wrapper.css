@@ -1,6 +1,7 @@
 .image-wrapper {
   --padding: 2px;
   display: flex;
+  align-items: start;
   flex-wrap: wrap;
 }
 .image-wrapper img {
@@ -14,7 +15,7 @@
 
 @media (orientation: landscape) {
   .image-wrapper > * {
-    height: 300px;
+    height: 50%;
   }
   .image-wrapper > *:nth-child(5n + 2) {
     width: 40%;
@@ -30,7 +31,7 @@
 }
 @media (orientation: portrait) {
   .image-wrapper > * {
-    height: 200px;
+    height: 25%;
   }
   .image-wrapper > *:nth-child(4n + 1),
   .image-wrapper > *:nth-child(4n + 4) {

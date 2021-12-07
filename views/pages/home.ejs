@@ -81,9 +81,15 @@
                     _setImages(_images.filter(i => i.id !== id))
             }
 
+            const displayImages = _images.slice(0,5)
+
+            while(displayImages.length < 10) {
+                displayImages.push(null)
+            }
+
             return (
                 <div className="image-wrapper">
-                    {_images.map(img => <Image key={img.id} image={img} remove={() => removeImage(img.id)}/>)}
+                    {displayImages.map(img => img ? <Image key={img.id} image={img} remove={() => removeImage(img.id)}/> : <div/>)}
                 </div>
             )
         }
