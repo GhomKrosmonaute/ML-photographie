@@ -4,5 +4,8 @@
 
     <%- include('embed'); %>
     <%- include('styles'); %>
-    <%- include('scripts') %>
+
+    <% for(script of scripts){ %>
+        <%- include('scripts/' + script) %>
+    <% } %>
 </head>

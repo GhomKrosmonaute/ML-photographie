@@ -23,15 +23,18 @@ ol {
 }
 
 a,
-button {
+button,
+.clickable-icon {
   color: var(--COLOR_2);
   text-decoration: none;
   display: inline-block;
   margin: 10px;
+  cursor: pointer;
 }
 
 a:hover,
-button:hover {
+button:hover,
+.clickable-icon:hover {
   color: var(--COLOR_3);
   text-decoration: none;
 }

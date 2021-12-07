@@ -1,5 +1,18 @@
-<%- include('../partials/head'); %>
+<%- include('../partials/head', { scripts: ['react', 'scroll'] }); %>
+
+<body style="overflow: hidden">
+    <div id=stats class=section>
+        <a class=next href="/admin#settings"><i class="fas fa-sort-down"></i></a>
+    </div>
+
+    <div id=settings class=section>
+        <a class=prev href="/admin#stats"><i class="fas fa-sort-up"></i></a>
+    </div>
+</body>
 
 <a href="/"> Accueil </a>
+<a href="/new"> Importer </a>
 
 <h1> Administration </h1>
+
+Stats et paramètres du site.

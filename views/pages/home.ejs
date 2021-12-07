@@ -1,28 +1,30 @@
-<%- include('../partials/head'); %>
+<%- include('../partials/head', { scripts: ['react', 'scroll'] }); %>
 
 <body style="overflow: hidden">
     <%- include('../partials/colors') %>
 
     <div id="title" class="section">
-        <img src="<%- site.banner %>" alt="website banner">
+        <img class=background src="<%- site.banner %>" alt="website banner">
 
-        <div></div>
+        <div class=gradient></div>
 
-        <ul>
-            <li><a href="/#gallery"> Gallerie </a></li>
-            <li><a href="/#about"> A propos </a></li>
-            <% if(admin) { %>
-                <li><a href="/admin"> Administration </a></li>
-                <li class="more-of-850">
-                    <a href="/logout"> Se déconnecter </a>
-                </li>
-                <li class="less-of-850">
-                    <a href="/logout"><i class="fa fa-sign-out-alt"></i></a>
-                </li>
-            <% } else { %>
-                <li><a href="/login"> Se connecter </a></li>
-            <% } %>
-        </ul>
+        <nav>
+            <ul>
+                <li><a href="/#gallery"> Gallerie </a></li>
+                <li><a href="/#about"> A propos </a></li>
+                <% if(admin) { %>
+                    <li><a href="/admin"> Administration </a></li>
+                    <li class="more-of-850">
+                        <a href="/logout"> Se déconnecter </a>
+                    </li>
+                    <li class="less-of-850">
+                        <a href="/logout"><i class="fa fa-sign-out-alt"></i></a>
+                    </li>
+                <% } else { %>
+                    <li><a href="/login"> Se connecter </a></li>
+                <% } %>
+            </ul>
+        </nav>
 
         <h1> <%= site.name %> </h1>
 
@@ -30,19 +32,64 @@
     </div>
 
     <div id=gallery class="section">
-        <img src="<%- site.garden %>" alt="website garden">
+        <img class=background src="<%- site.garden %>" alt="website garden">
 
-        <div class="gradient"></div>
+        <div class=gradient></div>
 
-        <div class="image-wrapper">
-            <% for(const image of images){ %>
-                <%- include('../partials/image', { image }) %>
-            <% } %>
-        </div>
+        <div id="wrapper"></div>
 
         <a class=prev href="/#title"><i class="fas fa-sort-up"></i></a>
         <a class=next href="/#about"><i class="fas fa-sort-down"></i></a>
     </div>
+
+    <script type="text/babel">
+        function Image({ image, remove }) {
+            const [_public, setPublic] = React.useState(image.public)
+
+            function unpublish() {
+                setPublic(false)
+            }
+
+            function publish() {
+                if(confirm("Voulez-vous vraiment publier la photo ?")) setPublic(true)
+            }
+
+            return (
+                <div className={"image " + (_public ? "public" : "")}>
+                    <img src={"/public/images/photos/" + image.name} alt={"photo " + image.id}/>
+                    <div className="buttons">
+                        <% if(admin){ %>
+                            <a href={"/edit/" + image.id} title="Modifier"><i className="fas fa-edit"/></a>
+                            <span className="clickable-icon"><i className="fas fa-trash-alt" title="Supprimer" onClick={remove}/></span>
+                            <span className="clickable-icon">{_public
+                                ? <i className="fas fa-ban" title="Rendre privée" onClick={unpublish}/>
+                                : <i className="fas fa-paper-plane" title="Publier" onClick={publish}/>
+                            }</span>
+                        <% } %>
+                        <a href={"/view/" + image.id} title="Afficher"><i className="fa fa-search-plus"/></a>
+                        <a href={"/order/" + image.id} title="Commander"><i className="fa fa-plus"/></a>
+                    </div>
+                </div>
+            )
+        }
+
+        function Wrapper() {
+            const [_images, _setImages] = React.useState(<%- JSON.stringify(images) %>)
+
+            function removeImage(id){
+                if(confirm("Supprimer l'image ?"))
+                    _setImages(_images.filter(i => i.id !== id))
+            }
+
+            return (
+                <div className="image-wrapper">
+                    {_images.map(img => <Image key={img.id} image={img} remove={() => removeImage(img.id)}/>)}
+                </div>
+            )
+        }
+
+        ReactDOM.render(<Wrapper/>, document.getElementById('wrapper'));
+    </script>
 
     <div id=about class="section">
         <a class=prev href="/#gallery"><i class="fas fa-sort-up"></i></a>

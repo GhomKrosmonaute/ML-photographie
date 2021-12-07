@@ -33,7 +33,7 @@ router.get("/admin", (req, res) => {
   if (!req.session.admin)
     return res
       .status(401)
-      .send("VOus devez être connecté en tant qu'administrateur.")
+      .send("Vous devez être connecté en tant qu'administrateur.")
 
   res.render("pages/admin")
 })

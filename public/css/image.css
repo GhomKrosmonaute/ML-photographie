@@ -27,9 +27,19 @@
 }
 
 .image:hover > .buttons > * {
-  color: var(--COLOR_4);
+  color: var(--COLOR_4) !important;
 }
 
-.image > .buttons > *:hover {
-  color: var(--COLOR_5);
+.image:hover > .buttons > *:hover {
+  color: var(--COLOR_5) !important;
 }
+
+.image:not(.public) img {
+  /*filter: blur(2px);*/
+  filter: brightness(0.5);
+  transition: filter 200ms;
+}
+
+/*.image:not(.public):hover {*/
+/*  filter: none*/
+/*}*/

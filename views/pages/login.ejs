@@ -1,16 +1,18 @@
-<%- include('../partials/head'); %>
+<%- include('../partials/head', { scripts: [] }); %>
 
 <body style="overflow: hidden">
     <%- include('../partials/colors') %>
 
     <div id="title" class="section">
-        <img src="<%- site.banner ?? "/public/images/banner.jpg" %>" alt="website banner">
+        <img class=background src="<%- site.banner ?? "/public/images/banner.jpg" %>" alt="website banner">
 
-        <div></div>
+        <div class=gradient></div>
 
-        <ul>
-            <li><a href="/"> Accueil </a></li>
-        </ul>
+        <nav>
+            <ul>
+                <li><a href="/"> Accueil </a></li>
+            </ul>
+        </nav>
 
         <h1 style="padding-bottom: 250px"> Connection </h1>
 
