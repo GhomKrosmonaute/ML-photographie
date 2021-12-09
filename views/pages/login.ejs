@@ -1,10 +1,10 @@
 <%- include('../partials/head', { scripts: [] }); %>
 
-<body style="overflow: hidden">
+<body>
     <%- include('../partials/colors') %>
 
-    <div id="title" class="section">
-        <img class=background src="<%- site.banner ?? "/public/images/banner.jpg" %>" alt="website banner">
+    <section>
+        <%- include('../partials/background', { name: 'primary' }) %>
 
         <div class=gradient></div>
 
@@ -16,10 +16,16 @@
 
         <h1 style="padding-bottom: 250px"> Connection </h1>
 
-        <form action="/login" method="post">
+        <form action="/login" method="post" style="
+            position: absolute;
+            z-index: 2;
+            left: 50vw;
+            top: 50vh;
+            transform: translate(-50%, -50%);
+        ">
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">
             <input type="submit" value="Login">
         </form>
-    </div>
+    </section>
 </body>

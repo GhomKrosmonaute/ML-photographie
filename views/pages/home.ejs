@@ -1,12 +1,12 @@
 <%- include('../partials/head', { scripts: ['react', 'scroll'] }); %>
 
-<body style="overflow: hidden">
+<body>
     <%- include('../partials/colors') %>
 
-    <div id="title" class="section">
-        <img class=background src="<%- site.banner %>" alt="website banner">
+    <section id="title">
+        <%- include('../partials/background', { name: 'primary' }) %>
 
-        <div class=gradient></div>
+        <div class="gradient"></div>
 
         <nav>
             <ul>
@@ -29,18 +29,26 @@
         <h1> <%= site.name %> </h1>
 
         <a class=next href="/#gallery"><i class="fas fa-sort-down"></i></a>
-    </div>
+    </section>
 
-    <div id=gallery class="section">
-        <img class=background src="<%- site.garden %>" alt="website garden">
+    <section id=gallery>
+        <%- include('../partials/background', { name: 'secondary' }) %>
 
-        <div class=gradient></div>
+        <div class="gradient"></div>
 
         <div id="wrapper"></div>
 
         <a class=prev href="/#title"><i class="fas fa-sort-up"></i></a>
         <a class=next href="/#about"><i class="fas fa-sort-down"></i></a>
-    </div>
+    </section>
+
+    <section id=about>
+        <%- include('../partials/background', { name: 'tertiary' }) %>
+
+        <div class="gradient"></div>
+
+        <a class=prev href="/#gallery"><i class="fas fa-sort-up"></i></a>
+    </section>
 
     <script type="text/babel">
         function Image({ image, remove }) {
@@ -59,12 +67,12 @@
                     <img src={"/public/images/photos/" + image.name} alt={"photo " + image.id}/>
                     <div className="buttons">
                         <% if(admin){ %>
-                            <a href={"/edit/" + image.id} title="Modifier"><i className="fas fa-edit"/></a>
-                            <span className="clickable-icon"><i className="fas fa-trash-alt" title="Supprimer" onClick={remove}/></span>
-                            <span className="clickable-icon">{_public
-                                ? <i className="fas fa-ban" title="Rendre privée" onClick={unpublish}/>
-                                : <i className="fas fa-paper-plane" title="Publier" onClick={publish}/>
-                            }</span>
+                        <a href={"/edit/" + image.id} title="Modifier"><i className="fas fa-edit"/></a>
+                        <span className="clickable-icon"><i className="fas fa-trash-alt" title="Supprimer" onClick={remove}/></span>
+                        <span className="clickable-icon">{_public
+                            ? <i className="fas fa-ban" title="Rendre privée" onClick={unpublish}/>
+                            : <i className="fas fa-paper-plane" title="Publier" onClick={publish}/>
+                        }</span>
                         <% } %>
                         <a href={"/view/" + image.id} title="Afficher"><i className="fa fa-search-plus"/></a>
                         <a href={"/order/" + image.id} title="Commander"><i className="fa fa-plus"/></a>
@@ -88,18 +96,25 @@
             }
 
             return (
-                <div className="image-wrapper">
-                    {displayImages.map(img => img ? <Image key={img.id} image={img} remove={() => removeImage(img.id)}/> : <div/>)}
+                <div className="image-wrapper" style={{
+                    overflowY: "scroll",
+                    position: "absolute",
+                    backgroundColor: "rgba(255, 255, 255, 2%)",
+                    boxShadow: "inset 0 0 15px rgba(0, 0, 0, 20%)",
+                    zIndex: 3,
+                    height: "85vh",
+                    width: "90vw",
+                    left: "50vw",
+                    top: "50vh",
+                    transform: "translate(-50%, -50%)"
+                }}>
+                    {displayImages.map((img, i) => img ? <Image key={i} image={img} remove={() => removeImage(img.id)}/> : <div key={i}/>)}
                 </div>
             )
         }
 
         ReactDOM.render(<Wrapper/>, document.getElementById('wrapper'));
     </script>
-
-    <div id=about class="section">
-        <a class=prev href="/#gallery"><i class="fas fa-sort-up"></i></a>
-    </div>
 </body>
 
 

@@ -33,6 +33,7 @@ app.listen(Number(process.env.ML_PORT ?? 3000))
 
 app.locals.site = {
   url: process.env.ML_SITE_URL,
+  backgrounds: {},
 }
 
 database.setup().then(() => {
@@ -40,7 +41,11 @@ database.setup().then(() => {
     .site()
     .select()
     .then((config) => {
-      for (const entry of config) app.locals.site[entry.name] = entry.value
+      for (const entry of config) {
+        if (!entry.name.startsWith("background."))
+          app.locals.site[entry.name] = entry.value
+        else app.locals.site.backgrounds[entry.name.split(".")[1]] = entry.value
+      }
 
       console.log(app.locals.site)
     })

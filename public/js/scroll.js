@@ -1,9 +1,9 @@
 {
-  const coolDown = 400
+  const coolDown = 1000
   let time = Date.now()
 
   document.body.onwheel = function (event) {
-    const section = document.querySelector(".section")
+    const section = document.querySelector("section")
 
     if (!section) return
 
