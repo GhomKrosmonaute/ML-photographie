@@ -3,10 +3,11 @@
   padding: 0;
   border: 0;
   box-sizing: border-box;
-  font-family: "Comfortaa", cursive;
+  font-family: Comfortaa, cursive;
 }
 
 html {
+  /*position: fixed;*/
   scroll-behavior: smooth;
 }
 

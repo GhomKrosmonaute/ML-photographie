@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write src public",
+    "format": "prettier --write src public react",
     "start": "tsc && node dist/main.js",
     "watch.build": "tsc --watch",
     "watch.start": "nodemon dist/main.js"
@@ -38,8 +38,14 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-react-views": "^0.11.0",
     "express-session": "^1.17.2",
+    "font-awesome": "^4.7.0",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.0.0",
     "knex": "^0.95.14",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "sqlite3": "^5.0.2"
   }
 }

@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Gwendolyn:wght@700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
-
+@import "fonts.css";
 @import "variables.css";
 @import "defaults.css";
 @import "nav.css";
@@ -8,6 +6,7 @@
 @import "form.css";
 @import "wrapper.css";
 @import "section.css";
-@import "colors.css";
+@import "color-bar.css";
 @import "image.css";
 @import "loader.css";
+@import "about.css";

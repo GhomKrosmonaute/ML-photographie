@@ -1,49 +1,46 @@
-<%- include('../partials/head', { scripts: ['react', 'scroll'] }); %>
+import React from 'react'
+
+import Nav from "../components/Nav"
+import Page from "../components/Page"
+import Section from "../components/Section"
+import Wrapper from "../components/Wrapper"
+import Citation from "../components/Citation"
+
+export default function Home({site, admin}) {
+    return <Page site={site}>
+        <Section id="title" backgroundName="primary" next="/#gallery" site={site}>
+            <Nav>
+                <a href="/#gallery"> Gallerie </a>
+                <a href="/#about"> A propos </a>
+                {admin ? <>
+                    <a href="/admin"> Administration </a>
+                    <a href="/logout">
+                        <span className="more-of-850"> Se déconnecter </span>
+                        <span className="less-of-850"> <i className="fa fa-sign-out-alt"/> </span>
+                    </a>
+
+                </> : <a href="/login"> Se connecter </a>}
+            </Nav>
+
+            <h1> {site.name} </h1>
+        </Section>
+
+        <Section site={site} id="gallery" backgroundName="secondary" prev="/#title" next="/#about">
+            <Wrapper/>
+        </Section>
+
+        <Section site={site} id="about" backgroundName="tertiary" prev="/#gallery">
+            <Citation> {site.description} </Citation>
+        </Section>
+    </Page>
+}
 
 <body>
-    <%- include('../partials/colors') %>
-
-    <section id="title">
-        <%- include('../partials/background', { name: 'primary' }) %>
-
-        <div class="gradient"></div>
-
-        <nav>
-            <ul>
-                <li><a href="/#gallery"> Gallerie </a></li>
-                <li><a href="/#about"> A propos </a></li>
-                <% if(admin) { %>
-                    <li><a href="/admin"> Administration </a></li>
-                    <li class="more-of-850">
-                        <a href="/logout"> Se déconnecter </a>
-                    </li>
-                    <li class="less-of-850">
-                        <a href="/logout"><i class="fa fa-sign-out-alt"></i></a>
-                    </li>
-                <% } else { %>
-                    <li><a href="/login"> Se connecter </a></li>
-                <% } %>
-            </ul>
-        </nav>
-
-        <h1> <%= site.name %> </h1>
-
-        <a class=next href="/#gallery"><i class="fas fa-sort-down"></i></a>
-    </section>
-
-    <section id=gallery>
-        <%- include('../partials/background', { name: 'secondary' }) %>
-
-        <div class="gradient"></div>
-
-        <div id="wrapper"></div>
-
-        <a class=prev href="/#title"><i class="fas fa-sort-up"></i></a>
-        <a class=next href="/#about"><i class="fas fa-sort-down"></i></a>
-    </section>
 
     <section id=about>
-        <%- include('../partials/background', { name: 'tertiary' }) %>
+        <%- include('../components/background', { name: 'tertiary' }) %>
+
+        <p> <%- site.description %> </p>
 
         <div class="gradient"></div>
 
