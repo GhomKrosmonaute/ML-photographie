@@ -3,7 +3,7 @@ const sass = require("gulp-sass")(require("sass"))
 const babel = require("gulp-babel")
 const sourcemaps = require("gulp-sourcemaps")
 const esbuild = require("gulp-esbuild")
-const rename = require("gulp-rename");
+const rename = require("gulp-rename")
 const cp = require("child_process")
 
 function styles() {
@@ -27,14 +27,16 @@ function _react() {
       })
     )
     .pipe(sourcemaps.write("."))
-    .pipe(rename(function (path) {
-      // Returns a completely new object, make sure you return all keys needed!
-      return {
-        dirname: path.dirname,
-        basename: path.basename.replace(".js", ""),
-        extname: ".jsx"
-      };
-    }))
+    .pipe(
+      rename(function (path) {
+        // Returns a completely new object, make sure you return all keys needed!
+        return {
+          dirname: path.dirname,
+          basename: path.basename.replace(".js", ""),
+          extname: ".jsx",
+        }
+      })
+    )
     .pipe(gulp.dest("views"))
 }
 
@@ -48,14 +50,16 @@ function react() {
         format: "cjs",
       })
     )
-    .pipe(rename(function (path) {
-      // Returns a completely new object, make sure you return all keys needed!
-      return {
-        dirname: path.dirname,
-        basename: path.basename.replace(".js", ""),
-        extname: path.dirname.includes("components") ? ".js" : ".jsx"
-      };
-    }))
+    .pipe(
+      rename(function (path) {
+        // Returns a completely new object, make sure you return all keys needed!
+        return {
+          dirname: path.dirname,
+          basename: path.basename.replace(".js", ""),
+          extname: path.dirname.includes("components") ? ".js" : ".jsx",
+        }
+      })
+    )
     .pipe(gulp.dest("views"))
 }
 
@@ -64,12 +68,15 @@ function watchReact() {
 }
 
 function ts() {
-  return gulp.src("src/**/*.ts")
-    .pipe(esbuild({
-      sourcemap: "inline",
-      tsconfig: "./tsconfig.json",
-      format: "cjs"
-    }))
+  return gulp
+    .src("src/**/*.ts")
+    .pipe(
+      esbuild({
+        sourcemap: "inline",
+        tsconfig: "./tsconfig.json",
+        format: "cjs",
+      })
+    )
     .pipe(gulp.dest("dist"))
 }
 
@@ -106,4 +113,9 @@ exports.watchStyles = startWatchingStyles
 exports.watchReact = startWatchingReact
 exports.watchTS = startWatchingTS
 
-exports.watch = gulp.parallel(startWatchingStyles, startWatchingReact, startWatchingTS, serve)
+exports.watch = gulp.parallel(
+  startWatchingStyles,
+  startWatchingReact,
+  startWatchingTS,
+  serve
+)

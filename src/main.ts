@@ -15,14 +15,17 @@ declare module "express-session" {
   }
 }
 
-const jsx = require("express-react-views");
+const jsx = require("express-react-views")
 
 export const app = express()
   .set("views", path.join(__dirname, "..", "views"))
   .set("view engine", "jsx")
-  .engine("jsx", jsx.createEngine({
-    transformViews: false
-  }))
+  .engine(
+    "jsx",
+    jsx.createEngine({
+      transformViews: false,
+    })
+  )
   .use(
     cors(),
     express.json(),
