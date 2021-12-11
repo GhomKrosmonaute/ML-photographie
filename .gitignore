@@ -2,8 +2,8 @@
 node_modules
 package-lock.json
 /public/images/photos
+/public/css
 /dist
 /views
 /data
-/public/css
 .env
