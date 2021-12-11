@@ -8,7 +8,7 @@ import Citation from "../components/Citation"
 
 export default function Home({ site, admin, images }) {
   return (
-    <Page site={site} scroll={true}>
+    <Page site={site} scroll>
       <Section id="title" backgroundName="primary" next="/#gallery" site={site}>
         <Nav>
           <a href="/#gallery"> Gallerie </a>

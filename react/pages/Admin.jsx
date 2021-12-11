@@ -6,7 +6,7 @@ import Section from "../components/Section"
 
 export default function Admin({ site }) {
   return (
-    <Page site={site} scroll={true}>
+    <Page site={site} scroll>
       <Section
         backgroundName="primary"
         site={site}
