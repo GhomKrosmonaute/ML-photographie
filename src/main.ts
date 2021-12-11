@@ -16,8 +16,13 @@ declare module "express-session" {
 }
 
 const jsx = require("express-react-views")
+const reload = require("reload")
 
-export const app = express()
+const app = express()
+
+reload(app)
+
+app
   .set("views", path.join(__dirname, "..", "views"))
   .set("view engine", "jsx")
   .engine(
@@ -39,8 +44,7 @@ export const app = express()
   )
   .use("/public", express.static(path.join(__dirname, "..", "public")))
   .use(router)
-
-app.listen(Number(process.env.ML_PORT ?? 3000))
+  .listen(Number(process.env.ML_PORT ?? 3000))
 
 app.locals.site = {
   url: process.env.ML_SITE_URL,

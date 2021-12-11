@@ -1,0 +1,11 @@
+{
+  "delay": 2500,
+  "ext": "*",
+  "ignore": [
+    "node_modules/*",
+    "src/*",
+    "react/*",
+    "scss/*",
+    "data/*"
+  ]
+}
