@@ -43,6 +43,16 @@ section > .background {
   object-fit: cover;
 }
 
+section:last-of-type > .gradient {
+  background: linear-gradient(
+    to bottom,
+    #000,
+    rgba(0, 0, 0, 50%) 50%,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 50%)
+  ) !important;
+}
+
 section:first-of-type > .gradient {
   background: linear-gradient(
     to top,
@@ -53,17 +63,7 @@ section:first-of-type > .gradient {
   ) !important;
 }
 
-section:last-of-type > .gradient {
-  background: linear-gradient(
-    to bottom,
-    #000,
-    rgba(0, 0, 0, 50%) 50%,
-    rgba(0, 0, 0, 0),
-    rgba(255, 255, 255, 50%)
-  ) !important;
-}
-
-section:first-child > h1 {
+section:first-of-type > h1 {
   z-index: 3;
   font-size: 45px;
   pointer-events: none;
@@ -77,12 +77,12 @@ section:first-child > h1 {
 }
 
 @media screen and (min-width: 850px) {
-  section:first-child > h1 {
+  section:first-of-type > h1 {
     font-size: 70px;
   }
 }
 
-section:first-child > h1::selection {
+section:first-of-type > h1::selection {
   background: none;
   content: "";
 }

@@ -1,20 +1,20 @@
 .image {
   position: relative;
   z-index: 1;
-}
 
-.image > .buttons {
-  background: linear-gradient(to top, rgba(0, 0, 0, 80%), rgba(0, 0, 0, 0));
-  display: flex;
-  justify-content: flex-end;
-  align-items: end;
-  position: absolute;
-  z-index: 1;
-  right: calc(var(--padding) / 2);
-  bottom: calc(var(--padding) / 2);
-  width: calc(100% - var(--padding));
-  height: 10px;
-  transition: height 200ms ease-in-out;
+  > .buttons {
+    background: linear-gradient(to top, rgba(0, 0, 0, 80%), rgba(0, 0, 0, 0));
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    position: absolute;
+    z-index: 1;
+    right: calc(var(--padding) / 2);
+    bottom: calc(var(--padding) / 2);
+    width: calc(100% - var(--padding));
+    height: 10px;
+    transition: height 200ms ease-in-out;
+  }
 }
 
 .image:hover > .buttons {

@@ -1,11 +1,9 @@
 import "dotenv/config"
 
-import ejs from "ejs"
 import cors from "cors"
 import path from "path"
 import express from "express"
 import session from "express-session"
-import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 
 import router from "./app/router"
@@ -17,14 +15,24 @@ declare module "express-session" {
   }
 }
 
+const jsx = require("express-react-views");
+
 export const app = express()
   .set("views", path.join(__dirname, "..", "views"))
-  .set("view engine", "ejs")
+  .set("view engine", "jsx")
+  .engine("jsx", jsx.createEngine({
+    transformViews: false
+  }))
   .use(
     cors(),
-    bodyParser(),
+    express.json(),
+    express.urlencoded({ extended: true }),
     cookieParser(),
-    session({ secret: process.env.ML_SESSION_SECRET as string })
+    session({
+      secret: process.env.ML_SESSION_SECRET as string,
+      saveUninitialized: false,
+      resave: false,
+    })
   )
   .use("/public", express.static(path.join(__dirname, "..", "public")))
   .use(router)
@@ -47,6 +55,7 @@ database.setup().then(() => {
         else app.locals.site.backgrounds[entry.name.split(".")[1]] = entry.value
       }
 
-      console.log(app.locals.site)
+      //console.log(app.locals.site)
+      console.log("Deployed to", app.locals.site.url)
     })
 })
