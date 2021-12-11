@@ -3,5 +3,7 @@ node_modules
 package-lock.json
 /public/images/photos
 /dist
+/views
 /data
+/public/css
 .env
