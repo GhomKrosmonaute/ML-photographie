@@ -14,7 +14,7 @@
     ]
   },
   "scripts": {
-    "format": "prettier --write src public react gulpfile.js",
+    "format": "prettier --write src public react scss gulpfile.js",
     "start": "node dist/main.js",
     "serve": "gulp serve",
     "watch": "gulp watch",
