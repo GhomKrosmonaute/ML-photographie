@@ -2,8 +2,14 @@
   display: flex;
   position: absolute;
   left: 0;
-  right: 0;
+  top: 0;
   z-index: 10;
+}
+
+.color-bar.bottom {
+  position: relative;
+  top: unset;
+  transform: translateY(-10px);
 }
 
 .color-bar > div {

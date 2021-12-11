@@ -6,11 +6,11 @@ import Section from "../components/Section"
 
 export default function Admin({ site }) {
   return (
-    <Page site={site}>
+    <Page site={site} scroll={true}>
       <Section
         backgroundName="primary"
         site={site}
-        id="stats"
+        id="metrics"
         next="/admin#settings"
       >
         <Nav>
@@ -25,7 +25,7 @@ export default function Admin({ site }) {
         backgroundName="secondary"
         site={site}
         id="settings"
-        prev="/admin#stats"
+        prev="/admin#metrics"
       />
     </Page>
   )

@@ -53,6 +53,7 @@ database.setup().then(() => {
         else app.locals.site.backgrounds[entry.name.split(".")[1]] = entry.value
       }
 
-      console.log(app.locals.site)
+      //console.log(app.locals.site)
+      console.log("Deployed to", app.locals.site.url)
     })
 })
