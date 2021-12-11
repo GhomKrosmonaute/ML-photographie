@@ -1,11 +1,9 @@
 import "dotenv/config"
 
-import ejs from "ejs"
 import cors from "cors"
 import path from "path"
 import express from "express"
 import session from "express-session"
-import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 
 import router from "./app/router"
@@ -17,14 +15,22 @@ declare module "express-session" {
   }
 }
 
+const jsx = require("express-react-views")
+
 export const app = express()
-  .set("views", path.join(__dirname, "..", "views"))
-  .set("view engine", "ejs")
+  .set("views", path.join(__dirname, "..", "react"))
+  .set("view engine", "jsx")
+  .engine("jsx", jsx.createEngine())
   .use(
     cors(),
-    bodyParser(),
+    express.json(),
+    express.urlencoded({ extended: true }),
     cookieParser(),
-    session({ secret: process.env.ML_SESSION_SECRET as string })
+    session({
+      secret: process.env.ML_SESSION_SECRET as string,
+      saveUninitialized: false,
+      resave: false,
+    })
   )
   .use("/public", express.static(path.join(__dirname, "..", "public")))
   .use(router)

@@ -18,7 +18,10 @@
 
     if (event.wheelDeltaY < 0) {
       // next
-      document.body.scroll(0, Math.min(currentScroll + height, document.body.scrollHeight - height))
+      document.body.scroll(
+        0,
+        Math.min(currentScroll + height, document.body.scrollHeight - height)
+      )
     } else {
       // prev
       document.body.scroll(0, Math.max(currentScroll - height, 0))

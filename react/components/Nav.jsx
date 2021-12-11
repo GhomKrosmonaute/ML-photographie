@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react"
 
 export default function Nav({ children }) {
-    return <nav>
-        <ul>
-            {children.map((child, i) => <li key={i}>{child}</li>)}
-        </ul>
+  return (
+    <nav>
+      <ul>
+        {(Array.isArray(children) ? children : [children]).map((child, i) => (
+          <li key={i}>{child}</li>
+        ))}
+      </ul>
     </nav>
+  )
 }

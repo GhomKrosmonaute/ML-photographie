@@ -13,7 +13,7 @@ router
   .route("/login")
   .get((req, res) => {
     if (req.session.admin) res.redirect("/admin")
-    else res.render("pages/login")
+    else res.render("pages/Login")
   })
   .post((req, res) => {
     if (
@@ -35,11 +35,11 @@ router.get("/admin", (req, res) => {
       .status(401)
       .send("Vous devez être connecté en tant qu'administrateur.")
 
-  res.render("pages/admin")
+  res.render("pages/Admin")
 })
 
 router.get("/", async (req, res) => {
-  res.render("pages/home", {
+  res.render("pages/Home", {
     admin: req.session.admin,
     images: await database.image().select(),
   })

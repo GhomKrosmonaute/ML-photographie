@@ -43,9 +43,9 @@ section > .background {
   object-fit: cover;
 }
 
-section:first-of-type > .gradient {
+section:last-of-type > .gradient {
   background: linear-gradient(
-    to top,
+    to bottom,
     #000,
     rgba(0, 0, 0, 50%) 50%,
     rgba(0, 0, 0, 0),
@@ -53,9 +53,9 @@ section:first-of-type > .gradient {
   ) !important;
 }
 
-section:last-of-type > .gradient {
+section:first-of-type > .gradient {
   background: linear-gradient(
-    to bottom,
+    to top,
     #000,
     rgba(0, 0, 0, 50%) 50%,
     rgba(0, 0, 0, 0),
