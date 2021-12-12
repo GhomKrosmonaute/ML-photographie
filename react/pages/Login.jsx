@@ -4,7 +4,7 @@ import Nav from "../components/Nav"
 import Page from "../components/Page"
 import Section from "../components/Section"
 
-export default function Login({ site }) {
+export default function Login({ site, error }) {
   return (
     <Page site={site}>
       <Section backgroundName="primary" site={site}>
@@ -33,6 +33,7 @@ export default function Login({ site }) {
           />
           <input type="password" name="password" placeholder="Password" />
           <input type="submit" value="Login" />
+          {error && <span className="error"> {error} </span>}
         </form>
       </Section>
     </Page>
