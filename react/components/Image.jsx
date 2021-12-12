@@ -14,7 +14,7 @@ export default function Image({ image, remove, admin }) {
   return (
     <div className={"image " + (isPublic ? "public" : "")}>
       <img
-        src={"/public/images/photos/" + image.name}
+        src={"/public/images/photos/" + image.id + ".jpg"}
         alt={"photo " + image.id}
       />
       <div className="buttons">
