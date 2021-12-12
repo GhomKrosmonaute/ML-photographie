@@ -34,7 +34,7 @@ export default function Wrapper({ images }) {
     >
       {displayImages.map((img, i) =>
         img ? (
-          <Image key={i} image={img} remove={() => removeImage(img.id)} />
+          <Image key={i} image={img} remove={removeImage} />
         ) : (
           <div key={i} />
         )

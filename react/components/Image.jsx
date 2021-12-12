@@ -1,6 +1,8 @@
 import React from "react"
 
-export default function Image({ image, remove, admin }) {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
+export default function Image({ image, remove, admin, view }) {
   const [isPublic, setIsPublic] = React.useState(image.public)
 
   function unpublish() {
@@ -12,46 +14,67 @@ export default function Image({ image, remove, admin }) {
   }
 
   return (
-    <div className={"image " + (isPublic ? "public" : "")}>
+    <div
+      className={"image " + (isPublic ? "public " : "") + (view ? "view " : "")}
+    >
       <img
         src={"/public/images/photos/" + image.id + ".jpg"}
         alt={"photo " + image.id}
       />
-      <div className="buttons">
+      <div
+        className="buttons"
+        style={
+          view
+            ? {
+                flexDirection: "column",
+                justifyContent: "center",
+                background: "none",
+                left: 0,
+                top: 0,
+                width: "100%",
+                height: "100%",
+              }
+            : {}
+        }
+      >
         {admin && (
           <>
-            <a href={"/edit/" + image.id} title="Modifier">
-              <i className="fas fa-edit" />
+            <a href={"/photo/edit/" + image.id} title="Modifier">
+              <FontAwesomeIcon icon={["fas", "edit"]} />
             </a>
-            <span className="clickable-icon">
-              <i
-                className="fas fa-trash-alt"
+            {remove ? (
+              <span
+                className="clickable-icon"
                 title="Supprimer"
-                onClick={remove}
-              />
-            </span>
+                onClick={() => remove(image.id)}
+              >
+                <FontAwesomeIcon icon={["fas", "trash-alt"]} />
+              </span>
+            ) : (
+              <a href={"/photo/remove/" + image.id} title="Supprimer">
+                <FontAwesomeIcon icon={["fas", "trash-alt"]} />
+              </a>
+            )}
             <span className="clickable-icon">
-              {_public ? (
-                <i
-                  className="fas fa-ban"
-                  title="Rendre privée"
-                  onClick={unpublish}
-                />
+              {isPublic ? (
+                <span title="Rendre privée" onClick={unpublish}>
+                  <FontAwesomeIcon icon={["fas", "ban"]} />
+                </span>
               ) : (
-                <i
-                  className="fas fa-paper-plane"
-                  title="Publier"
-                  onClick={publish}
-                />
+                <span title="Publier" onClick={publish}>
+                  <FontAwesomeIcon icon={["fas", "paper-plane"]} />
+                </span>
               )}
             </span>
           </>
         )}
-        <a href={"/view/" + image.id} title="Afficher">
-          <i className="fa fa-search-plus" />
-        </a>
-        <a href={"/order/" + image.id} title="Commander">
-          <i className="fa fa-plus" />
+        {!view && (
+          <a href={"/photo/view/" + image.id} title="Afficher">
+            <FontAwesomeIcon icon="search-plus" />
+          </a>
+        )}
+        <a href={"/photo/order/" + image.id} title="Commander">
+          <FontAwesomeIcon icon="plus" />
         </a>
       </div>
     </div>

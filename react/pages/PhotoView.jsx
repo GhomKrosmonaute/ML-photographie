@@ -2,12 +2,13 @@ import React from "react"
 
 import Nav from "../components/Nav"
 import Page from "../components/Page"
+import Image from "../components/Image"
 import Section from "../components/Section"
 
 export default function PhotoView({ site, image, admin }) {
   return (
     <Page site={site}>
-      <Section site={site} backgroundName="primary">
+      <Section site={site} backgroundName="primary" id="view">
         <Nav>
           <a href="/">Accueil</a>
         </Nav>
@@ -22,11 +23,7 @@ export default function PhotoView({ site, image, admin }) {
             maxWidth: "50vw",
           }}
         >
-          <img
-            style={{ width: "100%", height: "100%" }}
-            src={"/public/images/photos/" + image.id + ".jpg"}
-            alt={image.name}
-          />
+          <Image image={image} admin={admin} view={true} />
         </div>
       </Section>
     </Page>
