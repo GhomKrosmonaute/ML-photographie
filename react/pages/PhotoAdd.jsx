@@ -4,7 +4,7 @@ import Page from "../components/Page"
 import Section from "../components/Section"
 import Nav from "../components/Nav"
 
-export default function PhotoAdd({ site, error }) {
+export default function PhotoAdd({ site, error, categories }) {
   return (
     <Page site={site}>
       <Section site={site} backgroundName="primary">
@@ -20,6 +20,7 @@ export default function PhotoAdd({ site, error }) {
         <form
           action="/photo/add"
           method="post"
+          encType="multipart/form-data"
           style={{
             position: "absolute",
             zIndex: 2,
@@ -28,11 +29,19 @@ export default function PhotoAdd({ site, error }) {
             transform: "translate(-50%, -50%)",
           }}
         >
-          <input type="file" name="photo" />
+          <input type="file" name="photo" required />
           <label>
             <input type="checkbox" name="public" /> Rendre la photo publique.
           </label>
-          <input type="submit" value="Envoyer" />
+          <input type="text" name="name" required />
+          <select name="categoryId" required>
+            {categories.map((category, i) => (
+              <option key={i} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <input type="submit" value="Envoyer" accept="image/png, image/jpeg" />
           {error && <span className="error"> {error} </span>}
         </form>
       </Section>

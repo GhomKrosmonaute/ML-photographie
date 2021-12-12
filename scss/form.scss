@@ -3,10 +3,10 @@ form {
   display: flex;
 
   .error {
-    color: red;
+    color: rgb(255, 0, 0);
     padding: 10px;
     background-color: rgba(0, 0, 0, 20%);
-    border: 1px solid red;
+    border: 1px solid rgba(255, 0, 0, 50%);
     border-radius: 5px;
   }
 

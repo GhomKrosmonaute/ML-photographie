@@ -8,9 +8,15 @@ interface ConfigEntry {
 }
 
 interface Image {
-  id: string
+  id: number
   name: string
+  categoryId: number
   public: boolean
+}
+
+interface Category {
+  id: number
+  name: string
 }
 
 const dbPath = path.join(__dirname, "..", "..", "data")
@@ -31,6 +37,10 @@ export function image() {
 
 export function site() {
   return db<ConfigEntry>("site")
+}
+
+export function category() {
+  return db<Category>("category")
 }
 
 export async function setup() {
@@ -65,10 +75,21 @@ Merci et..... A bientôt peut être !`.replace(/\n+/g, "<br>"),
   } catch (error) {}
 
   try {
+    await db.schema.createTable("category", (table) => {
+      table.increments("id").primary()
+      table.string("name").notNullable()
+    })
+
+    await category().insert({ name: "Sans catégorie" })
+
     await db.schema.createTable("image", (table) => {
       table.increments("id").primary()
       table.string("name").notNullable()
-      table.string("category").notNullable()
+      table
+        .integer("categoryId")
+        .references("id")
+        .inTable("category")
+        .notNullable()
       table.boolean("public").defaultTo(false)
     })
   } catch (error) {}

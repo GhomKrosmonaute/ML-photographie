@@ -38,8 +38,8 @@ app
     cookieParser(),
     session({
       secret: process.env.ML_SESSION_SECRET as string,
-      saveUninitialized: true,
-      resave: true,
+      saveUninitialized: false,
+      resave: false,
     })
   )
   .use("/public", express.static(path.join(__dirname, "..", "public")))

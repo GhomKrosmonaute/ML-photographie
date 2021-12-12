@@ -1,5 +1,9 @@
+import path from "path"
+
 import * as express from "express"
 import * as database from "./database"
+
+import fileUpload from "express-fileupload"
 
 const router = express.Router()
 const photo = express.Router()
@@ -64,10 +68,72 @@ photo
   .route("/add")
   .all(adminOnly)
   .get(async (req, res) => {
-    res.render("pages/PhotoAdd")
+    const categories = await database.category().select()
+
+    res.render("pages/PhotoAdd", { categories })
   })
-  .post(async (req, res) => {
-    res.redirect("/photo/view/")
+  .post(fileUpload({}), async (req, res) => {
+    const photo = req.files?.photo
+    const name = req.body.name
+    const categoryId = Number(req.body.categoryId)
+    const _public = req.body.public
+
+    const categories = await database.category().select()
+
+    if (!name)
+      return res.status(422).render("pages/PhotoAdd", {
+        categories,
+        error: "Vous devez donner un nom à la photo importée.",
+      })
+
+    if (!categoryId)
+      return res.status(422).render("pages/PhotoAdd", {
+        categories,
+        error: "Vous devez assigner une catégorie à la photo importée.",
+      })
+
+    if (!photo)
+      return res.status(422).render("pages/PhotoAdd", {
+        categories,
+        error: "Vous devez cibler une photo a importer.",
+      })
+
+    if (Array.isArray(photo))
+      return res.status(422).render("pages/PhotoAdd", {
+        categories,
+        error: "Vous ne pouvez cibler qu'une seule photo a importer.",
+      })
+
+    if (!photo.mimetype.includes("image"))
+      return res.status(422).render("pages/PhotoAdd", {
+        categories,
+        error: "Le fichier importé doit être une photo valide.",
+      })
+
+    if (!categories.some((c) => c.id === categoryId))
+      return res.status(422).render("pages/PhotoAdd", {
+        categories,
+        error: "La catégorie choisie pour la photo importée doit exister !",
+      })
+
+    const id = await database.image().insert({
+      name,
+      categoryId,
+      public: !!_public,
+    })
+
+    photo.mv(
+      path.join(process.cwd(), "public", "images", "photos", id + ".jpg"),
+      async (error) => {
+        if (error)
+          return res.status(500).render("pages/PhotoAdd", {
+            categories,
+            error: "Une erreur est survennue lors de l'import de votre photo..",
+          })
+
+        res.redirect("/photo/view/" + id)
+      }
+    )
   })
 
 router.use((req, res, next) => {
