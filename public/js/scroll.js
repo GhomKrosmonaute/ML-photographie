@@ -1,6 +1,6 @@
 {
   const coolDown = 1000
-  const body = document.querySelector("body")
+  let body = document.querySelector("body")
   let time = Date.now()
 
   body.onwheel = (event) => {
@@ -11,20 +11,17 @@
     if (Date.now() > time + coolDown) time = Date.now()
     else return
 
+    body = document.querySelector("body")
+
     const height = section.clientHeight
-    const currentScroll = body.scrollTop - (body.scrollTop % height)
+    const currentScroll = window.scrollY - (window.scrollY % height)
 
     if ((event.wheelDeltaY ?? event.deltaY) < 0) {
       // next
-      console.log("scroll next")
-      body.scroll(
-        0,
-        Math.min(currentScroll + height, body.scrollHeight - height)
-      )
+      window.scroll(0, Math.min(currentScroll + height, body.scrollHeight))
     } else {
       // prev
-      console.log("scroll prev")
-      body.scroll(0, Math.max(currentScroll - height, 0))
+      window.scroll(0, Math.max(currentScroll - height, 0))
     }
   }
 }
