@@ -2,8 +2,8 @@ import React from "react"
 
 import Gradient from "./Gradient"
 import Background from "./Background"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSortUp, faSortDown } from "@fortawesome/free-solid-svg-icons"
 
 export default function Section({
   id,
@@ -20,13 +20,13 @@ export default function Section({
       {children}
       {prev && (
         <a className="prev" href={prev}>
-          <FontAwesomeIcon icon={faSortUp} />
+          <FontAwesomeIcon icon={["fas", "sort-up"]} />
           {/*<i className="fas fa-sort-up" />*/}
         </a>
       )}
       {next && (
         <a className="next" href={next}>
-          <FontAwesomeIcon icon={faSortDown} />
+          <FontAwesomeIcon icon={["fas", "sort-down"]} />
           {/*<i className="fas fa-sort-down" />*/}
         </a>
       )}

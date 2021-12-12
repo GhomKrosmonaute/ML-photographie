@@ -25,7 +25,12 @@ export default function Login({ site }) {
             transform: "translate(-50%, -50%)",
           }}
         >
-          <input type="text" name="username" placeholder="Username" autoFocus />
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            autoFocus={true}
+          />
           <input type="password" name="password" placeholder="Password" />
           <input type="submit" value="Login" />
         </form>

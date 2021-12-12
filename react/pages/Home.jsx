@@ -6,6 +6,8 @@ import Section from "../components/Section"
 import Wrapper from "../components/Wrapper"
 import Citation from "../components/Citation"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 export default function Home({ site, admin, images }) {
   return (
     <Page site={site} scroll>
@@ -18,7 +20,7 @@ export default function Home({ site, admin, images }) {
             <a href="/logout">
               <span className="more-of-850"> Se déconnecter </span>
               <span className="less-of-850">
-                <i className="fa fa-sign-out-alt" />
+                <FontAwesomeIcon icon={["fas", "sign-out-alt"]} />
               </span>
             </a>
           )}

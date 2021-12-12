@@ -14,6 +14,15 @@ section {
     cursor: pointer;
     left: 50vw;
     padding: 0 30vw;
+    transition: color 200ms;
+
+    > svg {
+      width: 3vh;
+    }
+
+    &:hover {
+      color: var(--COLOR_5);
+    }
   }
 
   > .prev {
