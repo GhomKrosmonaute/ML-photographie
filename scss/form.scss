@@ -10,6 +10,14 @@ form {
     border-radius: 5px;
   }
 
+  label {
+    color: var(--COLOR_5);
+
+    > :first-child {
+      margin-right: 10px;
+    }
+  }
+
   input {
     margin-bottom: 12px;
     padding: 7px 20px;

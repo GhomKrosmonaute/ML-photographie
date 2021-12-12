@@ -15,7 +15,7 @@ export default function Admin({ site }) {
       >
         <Nav>
           <a href="/"> Accueil </a>
-          <a href="/new"> Importer </a>
+          <a href="/photo/add"> Importer </a>
           <a href="/admin#settings"> Paramètres </a>
         </Nav>
 

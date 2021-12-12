@@ -5,10 +5,16 @@ const router = express.Router()
 const photo = express.Router()
 
 const adminOnly: express.RequestHandler = (req, res, next) => {
+  if (process.env.ML_DEV) {
+    next()
+    return
+  }
+
   if (!req.session.admin)
-    return res
-      .status(401)
-      .render("pages/Error", { code: 401, message: "Vous devez être connecté en tant qu'administrateur." })
+    return res.status(401).render("pages/Error", {
+      code: 401,
+      message: "Vous devez être connecté en tant qu'administrateur.",
+    })
 
   next()
 }
@@ -58,12 +64,17 @@ photo
   .route("/add")
   .all(adminOnly)
   .get(async (req, res) => {
-    res.render("pages/")
+    res.render("pages/PhotoAdd")
   })
-  .post(async () => {})
+  .post(async (req, res) => {
+    res.redirect("/photo/view/")
+  })
 
 router.use((req, res, next) => {
-  res.status(404).render("pages/Error", { code: 404, message: "Cette page est inexistante !" })
+  res.status(404).render("pages/Error", {
+    code: 404,
+    message: "Cette page est inexistante !",
+  })
 })
 
 export default router
