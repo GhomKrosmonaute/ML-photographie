@@ -2,8 +2,16 @@ import React from "react"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-export default function Image({ image, remove, admin, view }) {
-  const [isPublic, setIsPublic] = React.useState(image.public)
+export default function Image({
+  photo,
+  admin,
+  view,
+  controls,
+}: Pick<Options, "photo" | "admin"> & {
+  view?: boolean
+  controls?: boolean
+}) {
+  const [isPublic, setIsPublic] = React.useState(photo.public)
 
   function unpublish() {
     setIsPublic(false)
@@ -18,8 +26,8 @@ export default function Image({ image, remove, admin, view }) {
       className={"image " + (isPublic ? "public " : "") + (view ? "view " : "")}
     >
       <img
-        src={"/public/images/photos/" + image.id + ".jpg"}
-        alt={"photo " + image.id}
+        src={"/public/images/photos/" + photo.id + ".jpg"}
+        alt={"photo " + photo.id}
       />
       <div
         className="buttons"
@@ -39,19 +47,19 @@ export default function Image({ image, remove, admin, view }) {
       >
         {admin && (
           <>
-            <a href={"/photo/edit/" + image.id} title="Modifier">
+            <a href={"/photo/edit/" + photo.id} title="Modifier">
               <FontAwesomeIcon icon={["fas", "edit"]} />
             </a>
             {remove ? (
               <span
                 className="clickable-icon"
                 title="Supprimer"
-                onClick={() => remove(image.id)}
+                onClick={() => remove(photo.id)}
               >
                 <FontAwesomeIcon icon={["fas", "trash-alt"]} />
               </span>
             ) : (
-              <a href={"/photo/remove/" + image.id} title="Supprimer">
+              <a href={"/photo/remove/" + photo.id} title="Supprimer">
                 <FontAwesomeIcon icon={["fas", "trash-alt"]} />
               </a>
             )}
@@ -69,11 +77,11 @@ export default function Image({ image, remove, admin, view }) {
           </>
         )}
         {!view && (
-          <a href={"/photo/view/" + image.id} title="Afficher">
+          <a href={"/photo/view/" + photo.id} title="Afficher">
             <FontAwesomeIcon icon="search-plus" />
           </a>
         )}
-        <a href={"/photo/order/" + image.id} title="Commander">
+        <a href={"/photo/order/" + photo.id} title="Commander">
           <FontAwesomeIcon icon="plus" />
         </a>
       </div>

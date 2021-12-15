@@ -4,7 +4,12 @@ import Page from "./Page"
 import Section from "./Section"
 import Nav from "./Nav"
 
-export default function ErrorPage({ site, code, message, children }) {
+export default function ErrorPage({
+  site,
+  code,
+  message,
+  children,
+}: Pick<Options, "children" | "site" | "code" | "message">) {
   return (
     <Page site={site}>
       <Section site={site} backgroundName="primary">

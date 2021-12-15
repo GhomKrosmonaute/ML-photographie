@@ -2,23 +2,6 @@ import knex from "knex"
 import path from "path"
 import fs from "fs"
 
-interface ConfigEntry {
-  name: string
-  value: string
-}
-
-interface Image {
-  id: number
-  name: string
-  categoryId: number
-  public: boolean
-}
-
-interface Category {
-  id: number
-  name: string
-}
-
 const dbPath = path.join(__dirname, "..", "..", "data")
 
 if (!fs.existsSync(dbPath)) fs.mkdirSync(dbPath)
@@ -31,8 +14,8 @@ export const db = knex({
   },
 })
 
-export function image() {
-  return db<Image>("image")
+export function photo() {
+  return db<Photography>("photo")
 }
 
 export function site() {
@@ -41,6 +24,34 @@ export function site() {
 
 export function category() {
   return db<Category>("category")
+}
+
+export async function fullCategories(): Promise<
+  FullCategory<FullCategory<Photography>>[]
+> {
+  const headers = await category().whereNull("categoryId")
+  const fullHeaders: FullCategory<FullCategory<Photography>>[] = []
+
+  for (const header of headers) {
+    const subs = await category().where({ categoryId: header.id })
+    const fullSubs: FullCategory<Photography>[] = []
+
+    for (const sub of subs) {
+      fullSubs.push({
+        name: sub.name,
+        id: sub.id,
+        subs: await photo().where({ categoryId: sub.id }),
+      })
+    }
+
+    fullHeaders.push({
+      name: header.name,
+      id: header.id,
+      subs: fullSubs,
+    })
+  }
+
+  return fullHeaders
 }
 
 export async function setup() {
@@ -82,7 +93,7 @@ Merci et..... A bientôt peut être !`.replace(/\n+/g, "<br>"),
 
     await category().insert({ name: "Sans catégorie" })
 
-    await db.schema.createTable("image", (table) => {
+    await db.schema.createTable("photo", (table) => {
       table.increments("id").primary()
       table.string("name").notNullable()
       table

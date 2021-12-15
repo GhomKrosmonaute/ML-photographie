@@ -5,7 +5,11 @@ import Page from "../components/Page"
 import Image from "../components/Image"
 import Section from "../components/Section"
 
-export default function PhotoView({ site, image, admin }) {
+export default function PhotoView({
+  site,
+  photo,
+  admin,
+}: Pick<Options, "site" | "photo" | "admin">) {
   return (
     <Page site={site}>
       <Section site={site} backgroundName="primary" id="view">
@@ -23,7 +27,7 @@ export default function PhotoView({ site, image, admin }) {
             maxWidth: "50vw",
           }}
         >
-          <Image image={image} admin={admin} view={true} />
+          <Image photo={photo} admin={admin} view={true} />
         </div>
       </Section>
     </Page>

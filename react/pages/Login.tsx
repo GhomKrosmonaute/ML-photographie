@@ -4,7 +4,10 @@ import Nav from "../components/Nav"
 import Page from "../components/Page"
 import Section from "../components/Section"
 
-export default function Login({ site, error }) {
+export default function Login({
+  site,
+  error,
+}: Pick<Options, "site" | "error">) {
   return (
     <Page site={site}>
       <Section backgroundName="primary" site={site}>

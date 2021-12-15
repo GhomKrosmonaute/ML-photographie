@@ -4,7 +4,11 @@ import Page from "../components/Page"
 import Section from "../components/Section"
 import Nav from "../components/Nav"
 
-export default function PhotoAdd({ site, error, categories }) {
+export default function PhotoAdd({
+  site,
+  error,
+  categoryNames,
+}: Pick<Options, "site" | "error" | "categoryNames">) {
   return (
     <Page site={site}>
       <Section site={site} backgroundName="primary">
@@ -35,7 +39,7 @@ export default function PhotoAdd({ site, error, categories }) {
           </label>
           <input type="text" name="name" required />
           <select name="categoryId" required>
-            {categories.map((category, i) => (
+            {categoryNames.map((category, i) => (
               <option key={i} value={category.id}>
                 {category.name}
               </option>

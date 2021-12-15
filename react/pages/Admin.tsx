@@ -4,7 +4,7 @@ import Nav from "../components/Nav"
 import Page from "../components/Page"
 import Section from "../components/Section"
 
-export default function Admin({ site }) {
+export default function Admin({ site }: Pick<Options, "site">) {
   return (
     <Page site={site} scroll>
       <Section

@@ -59,7 +59,16 @@ router.get("/admin", adminOnly, (req, res) => {
 router.get("/", async (req, res) => {
   res.render("pages/Home", {
     admin: req.session.admin,
-    images: await database.image().select(),
+    images: await database.photo().select(),
+  })
+})
+
+router.get("/gallery", async (req, res) => {
+  const categories = await database.fullCategories()
+
+  res.render("pages/Gallery", {
+    admin: !!req.session.admin,
+    categories,
   })
 })
 
@@ -69,9 +78,9 @@ photo
   .route("/add")
   .all(adminOnly)
   .get(async (req, res) => {
-    const categories = await database.category().select()
+    const categoryNames = await database.category().select(["name", "id"])
 
-    res.render("pages/PhotoAdd", { categories })
+    res.render("pages/PhotoAdd", { categoryNames })
   })
   .post(fileUpload({}), async (req, res) => {
     const photo = req.files?.photo
@@ -117,7 +126,7 @@ photo
         error: "La catégorie choisie pour la photo importée doit exister !",
       })
 
-    const id = await database.image().insert({
+    const id = await database.photo().insert({
       name,
       categoryId,
       public: !!_public,
@@ -139,7 +148,7 @@ photo
 
 photo.get("/view/:id", async (req, res) => {
   const image = await database
-    .image()
+    .photo()
     .select()
     .where({ id: Number(req.params.id) })
     .first()

@@ -8,10 +8,17 @@ import ColorBar from "./ColorBar"
 
 library.add(fas)
 
-export default function Page({ site, children, scroll }) {
+export default function Page({
+  site,
+  title,
+  children,
+  scroll,
+}: Pick<Options, "site" | "children" | "title"> & {
+  scroll?: boolean
+}) {
   return (
     <>
-      <Head site={site} scroll={scroll} />
+      <Head title={title} site={site} scroll={scroll} />
       <body>
         <ColorBar />
         {children}

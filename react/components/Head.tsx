@@ -2,10 +2,16 @@ import React from "react"
 
 import Embed from "./Embed"
 
-export default function Head({ site, scroll }) {
+export default function Head({
+  site,
+  title,
+  scroll,
+}: Pick<Options, "site" | "title" | "scroll">) {
   return (
     <head>
-      <title> {site.name} </title>
+      <title>
+        {site.name} {title && `&pipe; ${title}`}
+      </title>
       <link
         rel="shortcut icon"
         href="/public/images/favicon.png"

@@ -8,7 +8,11 @@ import Citation from "../components/Citation"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-export default function Home({ site, admin, images }) {
+export default function Home({
+  site,
+  admin,
+  photos,
+}: Pick<Options, "site" | "admin" | "photos">) {
   return (
     <Page site={site} scroll>
       <Section id="title" backgroundName="primary" next="/#gallery" site={site}>
@@ -37,7 +41,7 @@ export default function Home({ site, admin, images }) {
         prev="/#title"
         next="/#about"
       >
-        <Wrapper images={images} />
+        <Wrapper photos={photos} admin={admin} />
       </Section>
 
       <Section

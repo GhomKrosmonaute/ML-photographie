@@ -2,15 +2,18 @@ import React from "react"
 
 import Image from "./Image"
 
-export default function Wrapper({ images }) {
-  const [cachedImages, setCachedImages] = React.useState(images)
+export default function Wrapper({
+  photos,
+  admin,
+}: Pick<Options, "photos" | "admin">) {
+  const [cachedImages, setCachedImages] = React.useState(photos)
 
-  function removeImage(id) {
+  function removeImage(id: number) {
     if (confirm("Supprimer l'image ?"))
       setCachedImages(cachedImages.filter((i) => i.id !== id))
   }
 
-  const displayImages = cachedImages.slice(0, 5)
+  const displayImages: (Photography | null)[] = cachedImages.slice(0, 5)
 
   while (displayImages.length < 10) {
     displayImages.push(null)
@@ -32,9 +35,9 @@ export default function Wrapper({ images }) {
         transform: "translate(-50%, -50%)",
       }}
     >
-      {displayImages.map((img, i) =>
-        img ? (
-          <Image key={i} image={img} remove={removeImage} />
+      {displayImages.map((photo, i) =>
+        photo ? (
+          <Image admin={admin} key={i} photo={photo} remove={removeImage} />
         ) : (
           <div key={i} />
         )
