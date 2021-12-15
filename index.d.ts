@@ -10,23 +10,23 @@ declare interface Photography {
   categoryId: number
 }
 
-declare interface FullPhotography {
-  id: number
-  name: string
-  public: boolean
-}
-
 declare interface Category {
   id: number
   name: string
   categoryId: number | null
 }
 
+declare interface CategoryName {
+  parentName: Category["name"]
+  name: Category["name"]
+  id: Category["id"]
+}
+
 declare interface FullCategory<
   Subs extends FullCategory<Photography> | Photography
 > {
-  id: number
-  name: string
+  id: Category["id"]
+  name: Category["name"]
   subs: Subs[]
 }
 
@@ -54,5 +54,5 @@ declare interface Options {
   photos: Photography[]
   category: FullCategory<FullCategory<Photography>>
   categories: FullCategory<FullCategory<Photography>>[]
-  categoryNames: Pick<Category, "id" | "name">[]
+  categoryNames: CategoryName[]
 }

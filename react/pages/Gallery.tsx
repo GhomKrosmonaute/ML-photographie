@@ -11,7 +11,12 @@ export default function Gallery({
   categories,
 }: Pick<Options, "site" | "admin" | "categories">) {
   return (
-    <Page site={site} title="Gallerie" scroll={true}>
+    <Page
+      site={site}
+      title="Gallerie"
+      nav={[<a href="/"> Accueil </a>]}
+      scroll={true}
+    >
       {categories.map((category, i, base) => {
         return (
           <Section

@@ -1,9 +1,8 @@
 import React from "react"
 
-import Nav from "../components/Nav"
 import Page from "../components/Page"
-import Image from "../components/Image"
 import Section from "../components/Section"
+import PhotoControls from "../components/PhotoControls"
 
 export default function PhotoView({
   site,
@@ -11,23 +10,13 @@ export default function PhotoView({
   admin,
 }: Pick<Options, "site" | "photo" | "admin">) {
   return (
-    <Page site={site}>
+    <Page site={site} title={photo.name} nav={[<a href="/">Accueil</a>]}>
       <Section site={site} backgroundName="primary" id="view">
-        <Nav>
-          <a href="/">Accueil</a>
-        </Nav>
-        <div
-          style={{
-            position: "absolute",
-            zIndex: 5,
-            left: "50vw",
-            top: "50vh",
-            transform: "translate(-50%, -50%)",
-            maxHeight: "50vh",
-            maxWidth: "50vw",
-          }}
-        >
-          <Image photo={photo} admin={admin} view={true} />
+        <h1>{photo.name}</h1>
+
+        <div>
+          <img src={`/public/images/photos/${photo.id}.jpg`} alt={photo.name} />
+          <PhotoControls admin={admin} photo={photo} />
         </div>
       </Section>
     </Page>

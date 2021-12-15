@@ -26,6 +26,18 @@ export function category() {
   return db<Category>("category")
 }
 
+export function categoryNames(): Promise<CategoryName[]> {
+  return db.raw(`
+    select
+        "head".name as parentName,
+        "sub".name as name,
+        "sub".id as id
+    from "category" "sub"
+    left join "category" "head" on "head".id = "sub".categoryId
+    where "sub".categoryId is not null
+  `)
+}
+
 export async function fullCategories(): Promise<
   FullCategory<FullCategory<Photography>>[]
 > {
@@ -89,9 +101,15 @@ Merci et..... A bientôt peut être !`.replace(/\n+/g, "<br>"),
     await db.schema.createTable("category", (table) => {
       table.increments("id").primary()
       table.string("name").notNullable()
+      table
+        .integer("categoryId")
+        .references("id")
+        .inTable("category")
+        .onDelete("cascade")
     })
 
     await category().insert({ name: "Sans catégorie" })
+    await category().insert({ name: "Sans catégorie", categoryId: 1 })
 
     await db.schema.createTable("photo", (table) => {
       table.increments("id").primary()
@@ -100,7 +118,7 @@ Merci et..... A bientôt peut être !`.replace(/\n+/g, "<br>"),
         .integer("categoryId")
         .references("id")
         .inTable("category")
-        .notNullable()
+        .onUpdate("cascade")
       table.boolean("public").defaultTo(false)
     })
   } catch (error) {}

@@ -1,6 +1,6 @@
 import React from "react"
 
-import Image from "./Image"
+import PhotoCard from "./PhotoCard"
 
 export default function Wrapper({
   photos,
@@ -27,17 +27,17 @@ export default function Wrapper({
         position: "absolute",
         backgroundColor: "rgba(255, 255, 255, 2%)",
         boxShadow: "inset 0 0 15px rgba(0, 0, 0, 20%)",
-        zIndex: 3,
+        transform: "translate(-50%, -50%)",
         height: "85vh",
         width: "90vw",
         left: "50vw",
         top: "50vh",
-        transform: "translate(-50%, -50%)",
+        zIndex: 3,
       }}
     >
       {displayImages.map((photo, i) =>
         photo ? (
-          <Image admin={admin} key={i} photo={photo} remove={removeImage} />
+          <PhotoCard admin={admin} key={i} photo={photo} remove={removeImage} />
         ) : (
           <div key={i} />
         )

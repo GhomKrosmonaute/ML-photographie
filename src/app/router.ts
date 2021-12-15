@@ -59,7 +59,7 @@ router.get("/admin", adminOnly, (req, res) => {
 router.get("/", async (req, res) => {
   res.render("pages/Home", {
     admin: req.session.admin,
-    images: await database.photo().select(),
+    photos: await database.photo().select(),
   })
 })
 
@@ -78,7 +78,7 @@ photo
   .route("/add")
   .all(adminOnly)
   .get(async (req, res) => {
-    const categoryNames = await database.category().select(["name", "id"])
+    const categoryNames = await database.categoryNames()
 
     res.render("pages/PhotoAdd", { categoryNames })
   })
@@ -88,7 +88,7 @@ photo
     const categoryId = Number(req.body.categoryId)
     const _public = req.body.public
 
-    const categories = await database.category().select()
+    const categories = await database.category().whereNotNull("categoryId")
 
     if (!name)
       return res.status(422).render("pages/PhotoAdd", {
@@ -120,7 +120,9 @@ photo
         error: "Le fichier importé doit être une photo valide.",
       })
 
-    if (!categories.some((c) => c.id === categoryId))
+    const category = categories.find((c) => c.id === categoryId)
+
+    if (!category)
       return res.status(422).render("pages/PhotoAdd", {
         categories,
         error: "La catégorie choisie pour la photo importée doit exister !",
@@ -137,7 +139,7 @@ photo
       async (error) => {
         if (error)
           return res.status(500).render("pages/PhotoAdd", {
-            categories,
+            categoryNames: await database.categoryNames(),
             error: "Une erreur est survennue lors de l'import de votre photo..",
           })
 

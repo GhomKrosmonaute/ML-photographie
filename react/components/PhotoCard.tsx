@@ -2,14 +2,13 @@ import React from "react"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-export default function Image({
+export default function PhotoCard({
   photo,
   admin,
-  view,
-  controls,
+  remove,
 }: Pick<Options, "photo" | "admin"> & {
+  remove: (photoId: Photography["id"]) => unknown
   view?: boolean
-  controls?: boolean
 }) {
   const [isPublic, setIsPublic] = React.useState(photo.public)
 
@@ -22,29 +21,12 @@ export default function Image({
   }
 
   return (
-    <div
-      className={"image " + (isPublic ? "public " : "") + (view ? "view " : "")}
-    >
+    <div className={"image " + (isPublic ? "public " : "")}>
       <img
         src={"/public/images/photos/" + photo.id + ".jpg"}
         alt={"photo " + photo.id}
       />
-      <div
-        className="buttons"
-        style={
-          view
-            ? {
-                flexDirection: "column",
-                justifyContent: "center",
-                background: "none",
-                left: 0,
-                top: 0,
-                width: "100%",
-                height: "100%",
-              }
-            : {}
-        }
-      >
+      <div className="buttons">
         {admin && (
           <>
             <a href={"/photo/edit/" + photo.id} title="Modifier">
@@ -76,11 +58,9 @@ export default function Image({
             </span>
           </>
         )}
-        {!view && (
-          <a href={"/photo/view/" + photo.id} title="Afficher">
-            <FontAwesomeIcon icon="search-plus" />
-          </a>
-        )}
+        <a href={"/photo/view/" + photo.id} title="Afficher">
+          <FontAwesomeIcon icon="search-plus" />
+        </a>
         <a href={"/photo/order/" + photo.id} title="Commander">
           <FontAwesomeIcon icon="plus" />
         </a>

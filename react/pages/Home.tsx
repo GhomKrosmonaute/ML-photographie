@@ -14,23 +14,42 @@ export default function Home({
   photos,
 }: Pick<Options, "site" | "admin" | "photos">) {
   return (
-    <Page site={site} scroll>
+    <Page
+      site={site}
+      title="Accueil"
+      nav={[
+        <a key={0} href="/gallery">
+          {" "}
+          Gallerie{" "}
+        </a>,
+        <a key={1} href="/#about">
+          {" "}
+          A propos{" "}
+        </a>,
+        admin && (
+          <a key={2} href="/admin">
+            {" "}
+            Administration{" "}
+          </a>
+        ),
+        admin && (
+          <a key={3} href="/logout">
+            <span className="more-of-850"> Se déconnecter </span>
+            <span className="less-of-850">
+              <FontAwesomeIcon icon={["fas", "sign-out-alt"]} />
+            </span>
+          </a>
+        ),
+        !admin ? (
+          <a key={4} href="/login">
+            {" "}
+            Se connecter{" "}
+          </a>
+        ) : null,
+      ]}
+      scroll
+    >
       <Section id="title" backgroundName="primary" next="/#gallery" site={site}>
-        <Nav>
-          <a href="/#gallery"> Gallerie </a>
-          <a href="/#about"> A propos </a>
-          {admin && <a href="/admin"> Administration </a>}
-          {admin && (
-            <a href="/logout">
-              <span className="more-of-850"> Se déconnecter </span>
-              <span className="less-of-850">
-                <FontAwesomeIcon icon={["fas", "sign-out-alt"]} />
-              </span>
-            </a>
-          )}
-          {!admin ? <a href="/login"> Se connecter </a> : null}
-        </Nav>
-
         <h1> {site.name} </h1>
       </Section>
 
