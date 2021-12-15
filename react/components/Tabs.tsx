@@ -18,7 +18,7 @@ export default function Tabs({ tabs }: { tabs: [name: any, content: any][] }) {
           </li>
         ))}
       </ul>
-      <div className="tab-content">{tabs[currentTab][0]}</div>
+      <div className="tab-content">{tabs[currentTab][1]}</div>
     </div>
   )
 }

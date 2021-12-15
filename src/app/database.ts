@@ -108,7 +108,7 @@ Merci et..... A bientôt peut être !`.replace(/\n+/g, "<br>"),
         .onDelete("cascade")
     })
 
-    await category().insert({ name: "Sans catégorie" })
+    await category().insert({ name: "Privé" })
     await category().insert({ name: "Sans catégorie", categoryId: 1 })
 
     await db.schema.createTable("photo", (table) => {

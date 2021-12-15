@@ -24,15 +24,8 @@ export default function Wrapper({
       className="image-wrapper"
       style={{
         overflowY: "scroll",
-        position: "absolute",
         backgroundColor: "rgba(255, 255, 255, 2%)",
         boxShadow: "inset 0 0 15px rgba(0, 0, 0, 20%)",
-        transform: "translate(-50%, -50%)",
-        height: "85vh",
-        width: "90vw",
-        left: "50vw",
-        top: "50vh",
-        zIndex: 3,
       }}
     >
       {displayImages.map((photo, i) =>
