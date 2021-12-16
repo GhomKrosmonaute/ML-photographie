@@ -19,17 +19,14 @@ export default function Home({
       title="Accueil"
       nav={[
         <a key={0} href="/gallery">
-          {" "}
-          Gallerie{" "}
+          Gallerie
         </a>,
         <a key={1} href="/#about">
-          {" "}
-          A propos{" "}
+          A propos
         </a>,
         admin && (
           <a key={2} href="/admin">
-            {" "}
-            Administration{" "}
+            Administration
           </a>
         ),
         admin && (
@@ -42,32 +39,37 @@ export default function Home({
         ),
         !admin ? (
           <a key={4} href="/login">
-            {" "}
-            Se connecter{" "}
+            Se connecter
           </a>
         ) : null,
       ]}
       scroll
     >
-      <Section id="title" backgroundName="primary" next="/#gallery" site={site}>
+      <Section
+        id="title"
+        backgroundName="primary"
+        next="/#highlighted"
+        site={site}
+      >
         <h1> {site.name} </h1>
       </Section>
 
       <Section
         site={site}
-        id="gallery"
+        id="highlighted"
         backgroundName="secondary"
         prev="/#title"
         next="/#about"
       >
-        <Wrapper photos={photos} admin={admin} />
+        <h1>Photos mises en avant</h1>
+        <Wrapper photos={photos} admin={admin} autoScroll />
       </Section>
 
       <Section
         site={site}
         id="about"
         backgroundName="tertiary"
-        prev="/#gallery"
+        prev="/#highlighted"
       >
         <Citation> {site.description} </Citation>
       </Section>

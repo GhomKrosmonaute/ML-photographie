@@ -4,7 +4,7 @@
     "semi": false
   },
   "scripts": {
-    "format": "prettier --write src public/js react scss gulpfile.js",
+    "format": "prettier --write src public/js react scss gulpfile.js migrations seeds knexfile.js",
     "start": "node dist/main.js",
     "build": "gulp build",
     "serve": "gulp serve",

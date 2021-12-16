@@ -18,7 +18,8 @@ export default function Head({
         type="image/x-icon"
       />
       <link rel="stylesheet" href="/public/css/index.css" />
-      {scroll && <script src="/public/js/scroll.js" defer />}
+      <script src="/public/js/autoScroll.js" defer />
+      {scroll && <script src="/public/js/sectionScroll.js" defer />}
       <script src="/reload/reload.js" />
       <Embed site={site} />
     </head>

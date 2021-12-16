@@ -5,7 +5,8 @@ import PhotoCard from "./PhotoCard"
 export default function Wrapper({
   photos,
   admin,
-}: Pick<Options, "photos" | "admin">) {
+  autoScroll,
+}: Pick<Options, "photos" | "admin"> & { autoScroll?: true }) {
   const [cachedImages, setCachedImages] = React.useState(photos)
 
   function removeImage(id: number) {
@@ -15,15 +16,13 @@ export default function Wrapper({
 
   const displayImages: (Photography | null)[] = cachedImages.slice(0, 5)
 
-  while (displayImages.length < 10) {
-    displayImages.push(null)
-  }
+  while (displayImages.length < 10) displayImages.push(null)
 
   return (
     <div
-      className="image-wrapper"
+      className={"image-wrapper " + (autoScroll ? "auto-scroll" : "")}
       style={{
-        overflowY: "scroll",
+        overflowY: autoScroll ? "scroll" : "hidden",
         backgroundColor: "rgba(255, 255, 255, 2%)",
         boxShadow: "inset 0 0 15px rgba(0, 0, 0, 20%)",
       }}
