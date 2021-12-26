@@ -1,20 +1,21 @@
 const path = require("path")
 const fs = require("fs")
 
-const dbPath = path.join(__dirname, "data")
+const dataPath = path.join(__dirname, "data")
+const dbPath = path.join(__dirname, "db")
 
-if (!fs.existsSync(dbPath)) fs.mkdirSync(dbPath)
+if (!fs.existsSync(dataPath)) fs.mkdirSync(dataPath)
 
 module.exports = {
   client: "sqlite3",
   useNullAsDefault: true,
   migrations: {
-    directory: path.join(__dirname, "migrations"),
+    directory: path.join(dbPath, "migrations"),
   },
   seeds: {
-    directory: path.join(__dirname, "seeds"),
+    directory: path.join(dbPath, "seeds"),
   },
   connection: {
-    filename: path.join(dbPath, "data.sql"),
+    filename: path.join(dataPath, "data.sql"),
   },
 }
