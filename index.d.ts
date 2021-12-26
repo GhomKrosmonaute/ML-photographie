@@ -16,6 +16,17 @@ declare interface Category {
   categoryId: number | null
 }
 
+declare interface Support {
+  id: number
+  name: string
+  description: string
+}
+
+declare interface Format {
+  id: number
+  name: string
+}
+
 declare interface CategoryName {
   parentName: Category["name"]
   name: Category["name"]
