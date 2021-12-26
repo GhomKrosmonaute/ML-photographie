@@ -51,18 +51,16 @@ app.locals.site = {
   backgrounds: {},
 }
 
-database.setup().then(() => {
-  database
-    .site()
-    .select()
-    .then((config) => {
-      for (const entry of config) {
-        if (!entry.name.startsWith("background."))
-          app.locals.site[entry.name] = entry.value
-        else app.locals.site.backgrounds[entry.name.split(".")[1]] = entry.value
-      }
+database
+  .site()
+  .select()
+  .then((config) => {
+    for (const entry of config) {
+      if (!entry.name.startsWith("background."))
+        app.locals.site[entry.name] = entry.value
+      else app.locals.site.backgrounds[entry.name.split(".")[1]] = entry.value
+    }
 
-      //console.log(app.locals.site)
-      console.log("Deployed to", app.locals.site.url)
-    })
-})
+    //console.log(app.locals.site)
+    console.log("Deployed to", app.locals.site.url)
+  })

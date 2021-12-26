@@ -4,27 +4,16 @@ import Nav from "../components/Nav"
 import Page from "../components/Page"
 import Section from "../components/Section"
 
-export default function Login({ site, error }) {
+export default function Login({
+  site,
+  error,
+}: Pick<Options, "site" | "error">) {
   return (
-    <Page site={site}>
+    <Page site={site} title="Se connecter" nav={[<a href="/"> Accueil </a>]}>
       <Section backgroundName="primary" site={site}>
-        <Nav>
-          <a href="/"> Accueil </a>
-        </Nav>
+        <h1> Connection </h1>
 
-        <h1 style={{ paddingBottom: "250px" }}> Connection </h1>
-
-        <form
-          action="/login"
-          method="post"
-          style={{
-            position: "absolute",
-            zIndex: 2,
-            left: "50vw",
-            top: "50vh",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
+        <form action="/login" method="post">
           <input
             type="text"
             name="username"

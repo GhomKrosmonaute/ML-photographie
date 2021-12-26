@@ -10,6 +10,7 @@ const photo = express.Router()
 
 const adminOnly: express.RequestHandler = (req, res, next) => {
   if (process.env.ML_DEV) {
+    req.session.admin = true
     next()
     return
   }
@@ -58,7 +59,16 @@ router.get("/admin", adminOnly, (req, res) => {
 router.get("/", async (req, res) => {
   res.render("pages/Home", {
     admin: req.session.admin,
-    images: await database.image().select(),
+    photos: await database.photo().select(),
+  })
+})
+
+router.get("/gallery", async (req, res) => {
+  const categories = await database.fullCategories()
+
+  res.render("pages/Gallery", {
+    admin: !!req.session.admin,
+    categories,
   })
 })
 
@@ -68,9 +78,9 @@ photo
   .route("/add")
   .all(adminOnly)
   .get(async (req, res) => {
-    const categories = await database.category().select()
+    const categoryNames = await database.categoryNames()
 
-    res.render("pages/PhotoAdd", { categories })
+    res.render("pages/PhotoAdd", { categoryNames })
   })
   .post(fileUpload({}), async (req, res) => {
     const photo = req.files?.photo
@@ -78,7 +88,7 @@ photo
     const categoryId = Number(req.body.categoryId)
     const _public = req.body.public
 
-    const categories = await database.category().select()
+    const categories = await database.category().whereNotNull("categoryId")
 
     if (!name)
       return res.status(422).render("pages/PhotoAdd", {
@@ -110,13 +120,15 @@ photo
         error: "Le fichier importé doit être une photo valide.",
       })
 
-    if (!categories.some((c) => c.id === categoryId))
+    const category = categories.find((c) => c.id === categoryId)
+
+    if (!category)
       return res.status(422).render("pages/PhotoAdd", {
         categories,
         error: "La catégorie choisie pour la photo importée doit exister !",
       })
 
-    const id = await database.image().insert({
+    const id = await database.photo().insert({
       name,
       categoryId,
       public: !!_public,
@@ -127,7 +139,7 @@ photo
       async (error) => {
         if (error)
           return res.status(500).render("pages/PhotoAdd", {
-            categories,
+            categoryNames: await database.categoryNames(),
             error: "Une erreur est survennue lors de l'import de votre photo..",
           })
 
@@ -138,7 +150,7 @@ photo
 
 photo.get("/view/:id", async (req, res) => {
   const image = await database
-    .image()
+    .photo()
     .select()
     .where({ id: Number(req.params.id) })
     .first()

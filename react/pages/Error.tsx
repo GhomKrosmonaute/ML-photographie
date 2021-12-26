@@ -1,17 +1,22 @@
 import React from "react"
 
-import Page from "./Page"
-import Section from "./Section"
-import Nav from "./Nav"
+import Page from "../components/Page"
+import Section from "../components/Section"
+import Nav from "../components/Nav"
 
-export default function ErrorPage({ site, code, message, children }) {
+export default function Error({
+  site,
+  code,
+  message,
+  children,
+}: Pick<Options, "children" | "site" | "code" | "message">) {
   return (
-    <Page site={site}>
+    <Page
+      site={site}
+      title={`Error ${code}`}
+      nav={[<a href="/">Retour à l'accueil</a>]}
+    >
       <Section site={site} backgroundName="primary">
-        <Nav>
-          <a href="/">Accueil</a>
-        </Nav>
-
         <h1
           style={{
             fontFamily: "arial",

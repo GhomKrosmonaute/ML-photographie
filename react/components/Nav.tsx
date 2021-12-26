@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Nav({ children }) {
+export default function Nav({ children }: Pick<Options, "children">) {
   return (
     <nav>
       <ul>

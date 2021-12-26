@@ -4,30 +4,30 @@ import Page from "../components/Page"
 import Section from "../components/Section"
 import Nav from "../components/Nav"
 
-export default function PhotoAdd({ site, error, categories }) {
+export default function PhotoAdd({
+  site,
+  error,
+  categoryNames,
+}: Pick<Options, "site" | "error" | "categoryNames">) {
   return (
-    <Page site={site}>
+    <Page
+      site={site}
+      title="Importer une photo"
+      nav={[
+        <a href="/"> Accueil </a>,
+        <a href="/#gallery"> Gallerie </a>,
+        <a href="/admin"> Administration </a>,
+        <a href="/logout"> Se déconnecter </a>,
+      ]}
+    >
       <Section site={site} backgroundName="primary">
-        <Nav>
-          <a href="/"> Accueil </a>
-          <a href="/#gallery"> Gallerie </a>
-          <a href="/admin"> Administration </a>
-          <a href="/logout"> Se déconnecter </a>
-        </Nav>
-
-        <h1 style={{ paddingBottom: "250px" }}> Importer une photo </h1>
+        <h1> Importer une photo </h1>
 
         <form
           action="/photo/add"
           method="post"
           encType="multipart/form-data"
-          style={{
-            position: "absolute",
-            zIndex: 2,
-            left: "50vw",
-            top: "50vh",
-            transform: "translate(-50%, -50%)",
-          }}
+          style={{ width: "40vw" }}
         >
           <input type="file" name="photo" required />
           <label>
@@ -35,9 +35,9 @@ export default function PhotoAdd({ site, error, categories }) {
           </label>
           <input type="text" name="name" required />
           <select name="categoryId" required>
-            {categories.map((category, i) => (
+            {categoryNames.map((category, i) => (
               <option key={i} value={category.id}>
-                {category.name}
+                {category.parentName} / {category.name}
               </option>
             ))}
           </select>

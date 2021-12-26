@@ -12,12 +12,17 @@ export default function Section({
   next,
   prev,
   children,
+}: Pick<Options, "site" | "children"> & {
+  id?: string
+  backgroundName: keyof Site["backgrounds"]
+  next?: string
+  prev?: string
 }) {
   return (
     <section id={id}>
       <Background name={backgroundName} site={site} />
       <Gradient />
-      {children}
+      <div className="content">{children}</div>
       {prev && (
         <a className="prev" href={prev}>
           <FontAwesomeIcon icon={["fas", "sort-up"]} />

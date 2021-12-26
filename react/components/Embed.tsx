@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Embed({ site }) {
+export default function Embed({ site }: Pick<Options, "site">) {
   return (
     <>
       <meta property="og:title" content={site.name} />

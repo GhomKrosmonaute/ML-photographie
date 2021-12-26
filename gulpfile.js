@@ -20,7 +20,7 @@ function watchStyles() {
 
 function react() {
   return gulp
-    .src("react/**/*.jsx")
+    .src(["react/**/*.jsx", "react/**/*.tsx"])
     .pipe(
       esbuild({
         jsx: "transform",
@@ -42,7 +42,7 @@ function react() {
 }
 
 function watchReact() {
-  return gulp.watch("react/**/*.jsx", react)
+  return gulp.watch(["react/**/*.jsx", "react/**/*.tsx"], react)
 }
 
 function ts() {
