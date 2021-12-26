@@ -1,5 +1,7 @@
 import React from "react"
 
-export default function Citation({ children }: Pick<Options, "children">) {
-  return <p className="citation"> {children} </p>
+export default function Citation({ content }: { content: string }) {
+  return (
+    <p className="citation" dangerouslySetInnerHTML={{ __html: content }} />
+  )
 }

@@ -71,7 +71,7 @@ export default function Home({
         backgroundName="tertiary"
         prev="/#highlighted"
       >
-        <Citation> {site.description} </Citation>
+        <Citation content={site.description} />
       </Section>
     </Page>
   )
