@@ -27,6 +27,16 @@ declare interface Format {
   name: string
 }
 
+declare interface TableNames {
+  format: Format
+  support: Support
+  photo: Photography
+  category: Category
+  site: ConfigEntry
+  photo_format: { photoId: number; formatId: number }
+  photo_support: { photoId: number; supportId: number }
+}
+
 declare interface CategoryName {
   parentName: Category["name"]
   name: Category["name"]

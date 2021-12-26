@@ -52,7 +52,7 @@ app.locals.site = {
 }
 
 database
-  .site()
+  .table("site")
   .select()
   .then((config) => {
     for (const entry of config) {

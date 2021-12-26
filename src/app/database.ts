@@ -2,16 +2,10 @@ import knex from "knex"
 
 export const db = knex(require("../../knexfile"))
 
-export function photo() {
-  return db<Photography>("photo")
-}
-
-export function site() {
-  return db<ConfigEntry>("site")
-}
-
-export function category() {
-  return db<Category>("category")
+export function table<TableName extends keyof TableNames>(
+  tableName: TableName
+) {
+  return db<TableNames[TableName]>(tableName)
 }
 
 export function categoryNames(): Promise<CategoryName[]> {
@@ -29,18 +23,18 @@ export function categoryNames(): Promise<CategoryName[]> {
 export async function fullCategories(): Promise<
   FullCategory<FullCategory<Photography>>[]
 > {
-  const headers = await category().whereNull("categoryId")
+  const headers = await table("category").whereNull("categoryId")
   const fullHeaders: FullCategory<FullCategory<Photography>>[] = []
 
   for (const header of headers) {
-    const subs = await category().where({ categoryId: header.id })
+    const subs = await table("category").where({ categoryId: header.id })
     const fullSubs: FullCategory<Photography>[] = []
 
     for (const sub of subs) {
       fullSubs.push({
         name: sub.name,
         id: sub.id,
-        subs: await photo().where({ categoryId: sub.id }),
+        subs: await table("photo").where({ categoryId: sub.id }),
       })
     }
 
