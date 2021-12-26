@@ -144,12 +144,10 @@ photo.get("/view/:id", async (req, res) => {
     .first()
 
   if (!image)
-    return res
-      .status(404)
-      .render("pages/Error", {
-        code: 404,
-        message: "Cette photo n'existe pas.",
-      })
+    return res.status(404).render("pages/Error", {
+      code: 404,
+      message: "Cette photo n'existe pas.",
+    })
 
   res.render("pages/PhotoView", { admin: req.session.admin, image })
 })
