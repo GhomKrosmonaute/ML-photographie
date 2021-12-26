@@ -14,7 +14,11 @@ export default function Gallery({
     <Page
       site={site}
       title="Gallerie"
-      nav={[<a href="/"> Accueil </a>]}
+      nav={[
+        <a key={1} href="/">
+          Accueil
+        </a>,
+      ]}
       scroll={true}
     >
       {categories.map((category, i, base) => {
