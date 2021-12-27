@@ -2,7 +2,7 @@
 node_modules
 package-lock.json
 /fixtures
-/public/images/photos
+/public/images/photos/*.jpg
 /public/css
 /dist
 /views
