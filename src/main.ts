@@ -23,7 +23,7 @@ const app = express()
 reload(app)
 
 app
-  .set("views", path.join(__dirname, "..", "views"))
+  .set("views", path.join(__dirname, "..", "views", "pages"))
   .set("view engine", "jsx")
   .engine(
     "jsx",

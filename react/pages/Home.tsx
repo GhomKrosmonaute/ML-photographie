@@ -62,7 +62,14 @@ export default function Home({
         next="/#about"
       >
         <h1>Photos mises en avant</h1>
-        <Wrapper photos={photos} admin={admin} autoScroll />
+        <div
+          style={{
+            width: "80vw",
+            height: "70vh",
+          }}
+        >
+          <Wrapper photos={photos} admin={admin} autoScroll />
+        </div>
       </Section>
 
       <Section

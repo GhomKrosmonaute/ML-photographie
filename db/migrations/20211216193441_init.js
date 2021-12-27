@@ -34,6 +34,7 @@ exports.up = async function (knex) {
       .inTable("category")
       .onUpdate("cascade")
     table.boolean("public").defaultTo(false)
+    table.boolean("highlighted").defaultTo(false)
   })
 
   await knex.schema.createTable("photo_format", (table) => {

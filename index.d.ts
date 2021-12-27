@@ -8,6 +8,7 @@ declare interface Photography {
   name: string
   public: boolean
   categoryId: number
+  highlighted: boolean
 }
 
 declare interface Category {

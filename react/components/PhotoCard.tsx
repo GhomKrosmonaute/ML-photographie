@@ -11,13 +11,22 @@ export default function PhotoCard({
   view?: boolean
 }) {
   const [isPublic, setIsPublic] = React.useState(photo.public)
+  const [highlighted, setHighlighted] = React.useState(photo.highlighted)
+
+  function publish() {
+    if (confirm("Voulez-vous vraiment publier la photo ?")) setIsPublic(true)
+  }
 
   function unpublish() {
     setIsPublic(false)
   }
 
-  function publish() {
-    if (confirm("Voulez-vous vraiment publier la photo ?")) setIsPublic(true)
+  function highlight() {
+    setHighlighted(true)
+  }
+
+  function unHighlight() {
+    setHighlighted(false)
   }
 
   return (
@@ -29,6 +38,23 @@ export default function PhotoCard({
       <div className="buttons">
         {admin && (
           <>
+            {highlighted ? (
+              <span
+                className="clickable-icon"
+                title="Retirer de la page d'accueil"
+                onClick={unHighlight}
+              >
+                <FontAwesomeIcon icon={["fas", "star-exclamation"]} />
+              </span>
+            ) : (
+              <span
+                className="clickable-icon"
+                title="Mettre en avant"
+                onClick={highlight}
+              >
+                <FontAwesomeIcon icon={["fas", "star"]} />
+              </span>
+            )}
             <a href={"/photo/edit/" + photo.id} title="Modifier">
               <FontAwesomeIcon icon={["fas", "edit"]} />
             </a>
@@ -45,17 +71,23 @@ export default function PhotoCard({
                 <FontAwesomeIcon icon={["fas", "trash-alt"]} />
               </a>
             )}
-            <span className="clickable-icon">
-              {isPublic ? (
-                <span title="Rendre privée" onClick={unpublish}>
-                  <FontAwesomeIcon icon={["fas", "ban"]} />
-                </span>
-              ) : (
-                <span title="Publier" onClick={publish}>
-                  <FontAwesomeIcon icon={["fas", "paper-plane"]} />
-                </span>
-              )}
-            </span>
+            {isPublic ? (
+              <span
+                title="Rendre privée"
+                className="clickable-icon"
+                onClick={unpublish}
+              >
+                <FontAwesomeIcon icon={["fas", "ban"]} />
+              </span>
+            ) : (
+              <span
+                title="Publier"
+                className="clickable-icon"
+                onClick={publish}
+              >
+                <FontAwesomeIcon icon={["fas", "paper-plane"]} />
+              </span>
+            )}
           </>
         )}
         <a href={"/photo/view/" + photo.id} title="Afficher">
