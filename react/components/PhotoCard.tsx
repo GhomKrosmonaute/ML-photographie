@@ -1,4 +1,5 @@
 import React from "react"
+import axios from "axios"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
@@ -14,7 +15,13 @@ export default function PhotoCard({
   const [highlighted, setHighlighted] = React.useState(photo.highlighted)
 
   function publish() {
-    if (confirm("Voulez-vous vraiment publier la photo ?")) setIsPublic(true)
+    console.log("ok")
+    if (confirm("Voulez-vous vraiment publier la photo ?")) {
+      axios
+        .get(`/photo/publish/${photo.id}`)
+        .then(() => setIsPublic(true))
+        .catch(console.error)
+    }
   }
 
   function unpublish() {
@@ -39,54 +46,50 @@ export default function PhotoCard({
         {admin && (
           <>
             {highlighted ? (
-              <span
+              <div
                 className="clickable-icon"
                 title="Retirer de la page d'accueil"
                 onClick={unHighlight}
               >
-                <FontAwesomeIcon icon={["fas", "star-exclamation"]} />
-              </span>
+                <FontAwesomeIcon icon={["fas", "star-half"]} />
+              </div>
             ) : (
-              <span
+              <div
                 className="clickable-icon"
                 title="Mettre en avant"
                 onClick={highlight}
               >
                 <FontAwesomeIcon icon={["fas", "star"]} />
-              </span>
+              </div>
             )}
             <a href={"/photo/edit/" + photo.id} title="Modifier">
               <FontAwesomeIcon icon={["fas", "edit"]} />
             </a>
             {remove ? (
-              <span
+              <div
                 className="clickable-icon"
                 title="Supprimer"
                 onClick={() => remove(photo.id)}
               >
                 <FontAwesomeIcon icon={["fas", "trash-alt"]} />
-              </span>
+              </div>
             ) : (
               <a href={"/photo/remove/" + photo.id} title="Supprimer">
                 <FontAwesomeIcon icon={["fas", "trash-alt"]} />
               </a>
             )}
             {isPublic ? (
-              <span
+              <div
                 title="Rendre privée"
                 className="clickable-icon"
                 onClick={unpublish}
               >
                 <FontAwesomeIcon icon={["fas", "ban"]} />
-              </span>
+              </div>
             ) : (
-              <span
-                title="Publier"
-                className="clickable-icon"
-                onClick={publish}
-              >
+              <div title="Publier" className="clickable-icon" onClick={publish}>
                 <FontAwesomeIcon icon={["fas", "paper-plane"]} />
-              </span>
+              </div>
             )}
           </>
         )}

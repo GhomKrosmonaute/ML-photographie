@@ -11,7 +11,11 @@ export default function Wrapper({
   autoScroll?: true
   customClassNames?: string
 }) {
-  const [cachedImages, setCachedImages] = React.useState(photos)
+  const [cachedImages, setCachedImages] = React.useState(
+    photos.filter((photo) => photo.public || admin)
+  )
+
+  if (cachedImages.length === 0) return <></>
 
   const rows: Photography[][] = [[cachedImages[0]]]
 
