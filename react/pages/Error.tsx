@@ -14,7 +14,11 @@ export default function Error({
     <Page
       site={site}
       title={`Error ${code}`}
-      nav={[<a href="/">Retour à l'accueil</a>]}
+      nav={[
+        <a href="/" key={0}>
+          Retour à l'accueil
+        </a>,
+      ]}
     >
       <Section site={site} backgroundName="primary">
         <h1

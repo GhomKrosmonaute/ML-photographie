@@ -1,0 +1,8 @@
+.two-columns {
+  width: 80vw;
+  display: flex;
+
+  > * {
+    width: 40vw;
+  }
+}

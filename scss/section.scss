@@ -87,16 +87,6 @@ section {
 
     h1 {
       z-index: 3;
-      font-size: 45px;
-      pointer-events: none;
-      text-align: center;
-      font-family: "Gwendolyn", cursive;
-      color: var(--COLOR_5);
-
-      ::selection {
-        background: none;
-        content: "";
-      }
     }
   }
 }

@@ -10,12 +10,24 @@ export default function PhotoView({
   admin,
 }: Pick<Options, "site" | "photo" | "admin">) {
   return (
-    <Page site={site} title={photo.name} nav={[<a href="/">Accueil</a>]}>
+    <Page
+      site={site}
+      title={photo.name}
+      nav={[
+        <a href="/" key={0}>
+          Accueil
+        </a>,
+      ]}
+    >
       <Section site={site} backgroundName="primary" id="view">
-        <h1>{photo.name}</h1>
+        <h1>{photo.name.replace(".jpg", "")}</h1>
 
         <div>
-          <img src={`/public/images/photos/${photo.id}.jpg`} alt={photo.name} />
+          <img
+            id="photo-view"
+            src={`/public/images/photos/${photo.id}.jpg`}
+            alt={photo.name}
+          />
           <PhotoControls admin={admin} photo={photo} />
         </div>
       </Section>

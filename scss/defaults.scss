@@ -38,5 +38,24 @@ button,
 }
 
 h1 {
-  color: var(--COLOR_1);
+  font-size: 45px;
+  font-family: "Gwendolyn", cursive;
+  color: var(--COLOR_5);
+}
+
+h2 {
+  font-size: 28px;
+  font-family: "Comfortaa", sans-serif;
+  color: var(--COLOR_4);
+}
+
+h1,
+h2 {
+  pointer-events: none;
+  text-align: center;
+
+  ::selection {
+    background: none;
+    content: "";
+  }
 }

@@ -1,8 +1,7 @@
 import path from "path"
-
+import * as utils from "./utils"
 import * as express from "express"
 import * as database from "./database"
-
 import fileUpload from "express-fileupload"
 
 const router = express.Router()
@@ -155,19 +154,19 @@ photo
   })
 
 photo.get("/view/:id", async (req, res) => {
-  const image = await database
-    .table("photo")
-    .select()
-    .where({ id: Number(req.params.id) })
-    .first()
+  const photo = await utils.fetchPhoto(req, res)
 
-  if (!image)
-    return res.status(404).render("Error", {
-      code: 404,
-      message: "Cette photo n'existe pas.",
-    })
+  if (!photo) return
 
-  res.render("PhotoView", { admin: req.session.admin, image })
+  res.render("PhotoView", { admin: req.session.admin, photo })
+})
+
+photo.get("/order/:id", async (req, res) => {
+  const photo = await utils.fetchPhoto(req, res)
+
+  if (!photo) return
+
+  res.render("PhotoOrder", { admin: req.session.admin, photo })
 })
 
 router.use((req, res, next) => {
