@@ -15,7 +15,7 @@ export default function PhotoCard({
   const [highlighted, setHighlighted] = React.useState(photo.highlighted)
 
   function publish() {
-    console.log("ok")
+    console.log("publish")
     if (confirm("Voulez-vous vraiment publier la photo ?")) {
       axios
         .get(`/photo/publish/${photo.id}`)
@@ -25,15 +25,30 @@ export default function PhotoCard({
   }
 
   function unpublish() {
+    console.log("unpublish")
     setIsPublic(false)
   }
 
   function highlight() {
+    console.log("highlight")
     setHighlighted(true)
   }
 
   function unHighlight() {
+    console.log("unHighlight")
     setHighlighted(false)
+  }
+
+  function onRemove() {
+    console.log("onRemove")
+    if (confirm("Voulez-vous vraiment supprimer cette photo ?")) {
+      axios
+        .get("/photo/remove/" + photo.id)
+        .then(() => {
+          remove(photo.id)
+        })
+        .catch(console.error)
+    }
   }
 
   return (
@@ -49,9 +64,11 @@ export default function PhotoCard({
               <div
                 className="clickable-icon"
                 title="Retirer de la page d'accueil"
-                onClick={unHighlight}
               >
-                <FontAwesomeIcon icon={["fas", "star-half"]} />
+                <FontAwesomeIcon
+                  icon={["fas", "star-half"]}
+                  onClick={unHighlight}
+                />
               </div>
             ) : (
               <div
@@ -65,19 +82,13 @@ export default function PhotoCard({
             <a href={"/photo/edit/" + photo.id} title="Modifier">
               <FontAwesomeIcon icon={["fas", "edit"]} />
             </a>
-            {remove ? (
-              <div
-                className="clickable-icon"
-                title="Supprimer"
-                onClick={() => remove(photo.id)}
-              >
-                <FontAwesomeIcon icon={["fas", "trash-alt"]} />
-              </div>
-            ) : (
-              <a href={"/photo/remove/" + photo.id} title="Supprimer">
-                <FontAwesomeIcon icon={["fas", "trash-alt"]} />
-              </a>
-            )}
+            <div
+              className="clickable-icon"
+              title="Supprimer"
+              onClick={onRemove}
+            >
+              <FontAwesomeIcon icon={["fas", "trash-alt"]} />
+            </div>
             {isPublic ? (
               <div
                 title="Rendre privée"

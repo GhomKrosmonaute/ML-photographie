@@ -1,8 +1,9 @@
+// todo: keep auto height and resize auto images in wrapper row
 .wrapper {
   --padding: 2px;
 
   &-row {
-    height: 200px;
+    width: 100%;
     display: flex;
     padding: var(--padding) 0;
 
@@ -10,9 +11,9 @@
       padding: 0 var(--padding);
     }
 
-    img {
-      object-fit: cover;
-    }
+    //img {
+    //  object-fit: cover;
+    //}
   }
 }
 
