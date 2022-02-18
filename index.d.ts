@@ -56,6 +56,7 @@ declare interface Site {
   url: string
   name: string
   description: string
+  photographer: string
   backgrounds: {
     primary: string
     secondary: string

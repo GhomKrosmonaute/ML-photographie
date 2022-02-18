@@ -1,7 +1,16 @@
 import React from "react"
 
-export default function Citation({ content }: { content: string }) {
+export default function Citation({
+  content,
+  children,
+}: {
+  content: string
+  children: any
+}) {
   return (
-    <p className="citation" dangerouslySetInnerHTML={{ __html: content }} />
+    <div>
+      {children}
+      <p className="citation" dangerouslySetInnerHTML={{ __html: content }} />
+    </div>
   )
 }

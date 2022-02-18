@@ -10,6 +10,10 @@ de partir à l'aventure en image et à la découverte de mon travail photographi
 Merci et..... A bientôt peut être !`.replace(/\n+/g, "<br>"),
     },
     {
+      name: "photographer",
+      value: "/public/images/defaults/photographer.jpg",
+    },
+    {
       name: "background.primary",
       value: "/public/images/defaults/primary.jpg",
     },

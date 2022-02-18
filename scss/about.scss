@@ -1,2 +1,14 @@
-#about > p {
+#photographer {
+  border-radius: 10px;
+  max-height: 40vh;
+  position: absolute;
+  transform: translate(0, -50%);
+  top: 50%;
+  left: -150px;
+  box-shadow: black 0 0 10px;
+}
+
+#about .citation {
+  text-align: left;
+  padding-left: 70px;
 }

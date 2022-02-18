@@ -5,6 +5,7 @@ import Page from "../components/Page"
 import Section from "../components/Section"
 import Wrapper from "../components/Wrapper"
 import Citation from "../components/Citation"
+import Photographer from "../components/Photographer"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
@@ -78,7 +79,9 @@ export default function Home({
         backgroundName="tertiary"
         prev="/#highlighted"
       >
-        <Citation content={site.description} />
+        <Citation content={site.description}>
+          <Photographer site={site} />
+        </Citation>
       </Section>
     </Page>
   )
