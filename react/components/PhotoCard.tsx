@@ -9,7 +9,6 @@ export default function PhotoCard({
   remove,
 }: Pick<Options, "photo" | "admin"> & {
   remove: (photoId: Photography["id"]) => unknown
-  view?: boolean
 }) {
   const [isPublic, setIsPublic] = React.useState(photo.public)
   const [highlighted, setHighlighted] = React.useState(photo.highlighted)
@@ -24,22 +23,22 @@ export default function PhotoCard({
     }
   }
 
-  function unpublish() {
+  const unpublish = () => {
     console.log("unpublish")
     setIsPublic(false)
   }
 
-  function highlight() {
+  const highlight = () => {
     console.log("highlight")
     setHighlighted(true)
   }
 
-  function unHighlight() {
+  const unHighlight = () => {
     console.log("unHighlight")
     setHighlighted(false)
   }
 
-  function onRemove() {
+  const onRemove = () => {
     console.log("onRemove")
     if (confirm("Voulez-vous vraiment supprimer cette photo ?")) {
       axios

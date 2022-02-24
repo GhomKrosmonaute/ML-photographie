@@ -29,7 +29,7 @@ await db("photo").insert(
         id: i + 1,
         highlighted: true,
         categoryId: category.id,
-        public: false,
+        public: true,
       }
     })
   )

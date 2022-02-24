@@ -1,12 +1,6 @@
-import knex from "knex"
+import { Sequelize } from "sequelize"
 
-export const db = knex(require("../../knexfile"))
-
-export function table<TableName extends keyof TableNames>(
-  tableName: TableName
-) {
-  return db<TableNames[TableName]>(tableName)
-}
+export const db = new Sequelize("sqlite::memory:")
 
 export function categoryNames(): Promise<CategoryName[]> {
   return db.raw(`

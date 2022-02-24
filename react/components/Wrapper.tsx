@@ -22,7 +22,7 @@ export default function Wrapper({
   for (const image of cachedImages.slice(1)) {
     const lastRow = rows[rows.length - 1]
 
-    if (lastRow.length < (rows.length % 2 === 0 ? 3 : 2)) {
+    if (lastRow.length < 3) {
       lastRow.push(image)
       rows[rows.length - 1] = lastRow
     } else rows.push([image])
