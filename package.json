@@ -4,7 +4,7 @@
     "semi": false
   },
   "scripts": {
-    "format": "prettier --write src public/js react scss gulpfile.js db knexfile.js",
+    "format": "prettier --write src public/js react scss gulpfile.js",
     "migrate": "knex migrate:latest && knex seed:run",
     "start": "node dist/main.js",
     "build": "gulp build",
