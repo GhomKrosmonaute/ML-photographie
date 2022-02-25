@@ -1,8 +1,14 @@
-import { Table } from "@ghom/orm"
 import { orm } from "../app/orm"
-import photo from "./photo"
+import { Table } from "@ghom/orm"
+import photo, { Photo } from "./photo"
 
-export function categoryNames(): Promise<CategoryName[]> {
+export function categoryNames(): Promise<
+  {
+    parentName: string
+    name: string
+    id: number
+  }[]
+> {
   return orm.db.raw(`
     select
         "head".name as parentName,
@@ -14,15 +20,14 @@ export function categoryNames(): Promise<CategoryName[]> {
   `)
 }
 
-export async function fullCategories(): Promise<
-  FullCategory<FullCategory<Photography>>[]
-> {
+export async function fullCategories() {
+  //: Promise<FullCategory<FullCategory<Photo>>[]>
   const headers = await category.query.whereNull("categoryId")
-  const fullHeaders: FullCategory<FullCategory<Photography>>[] = []
+  const fullHeaders = []
 
   for (const header of headers) {
     const subs = await category.query.where({ categoryId: header.id })
-    const fullSubs: FullCategory<Photography>[] = []
+    const fullSubs = []
 
     for (const sub of subs) {
       fullSubs.push({
@@ -43,13 +48,14 @@ export async function fullCategories(): Promise<
 }
 
 export interface Category {
-  table: string
-  version: number
+  id: number
+  name: string
+  categoryId: number | null
 }
 
 const category = new Table<Category>({
   name: "category",
-  priority: Infinity,
+  priority: 3,
   setup: (table) => {
     table.increments("id").primary()
     table.string("name").notNullable()
