@@ -7,7 +7,7 @@ import session from "express-session"
 import cookieParser from "cookie-parser"
 
 import router from "./app/router"
-import * as database from "./app/database"
+import * as database from "./app/orm"
 
 declare module "express-session" {
   interface SessionData {

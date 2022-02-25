@@ -1,5 +1,5 @@
 import * as express from "express"
-import * as database from "./database"
+import * as database from "./orm"
 
 export async function fetchPhoto(
   req: express.Request,

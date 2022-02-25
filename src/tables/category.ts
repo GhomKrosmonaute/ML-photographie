@@ -1,14 +1,9 @@
-import { db } from "../app/database"
-import { Table } from "../app/table"
-
-export function table<TableName extends keyof TableNames>(
-  tableName: TableName
-) {
-  return db<TableNames[TableName]>(tableName)
-}
+import { Table } from "@ghom/orm"
+import { orm } from "../app/orm"
+import photo from "./photo"
 
 export function categoryNames(): Promise<CategoryName[]> {
-  return db.raw(`
+  return orm.db.raw(`
     select
         "head".name as parentName,
         "sub".name as name,
@@ -22,18 +17,18 @@ export function categoryNames(): Promise<CategoryName[]> {
 export async function fullCategories(): Promise<
   FullCategory<FullCategory<Photography>>[]
 > {
-  const headers = await table("category").whereNull("categoryId")
+  const headers = await category.query.whereNull("categoryId")
   const fullHeaders: FullCategory<FullCategory<Photography>>[] = []
 
   for (const header of headers) {
-    const subs = await table("category").where({ categoryId: header.id })
+    const subs = await category.query.where({ categoryId: header.id })
     const fullSubs: FullCategory<Photography>[] = []
 
     for (const sub of subs) {
       fullSubs.push({
         name: sub.name,
         id: sub.id,
-        subs: await table("photo").where({ categoryId: sub.id }),
+        subs: await photo.query.where({ categoryId: sub.id }),
       })
     }
 
@@ -52,7 +47,7 @@ export interface Category {
   version: number
 }
 
-export default new Table<Category>({
+const category = new Table<Category>({
   name: "category",
   priority: Infinity,
   setup: (table) => {
@@ -65,3 +60,5 @@ export default new Table<Category>({
       .onDelete("cascade")
   },
 })
+
+export default category

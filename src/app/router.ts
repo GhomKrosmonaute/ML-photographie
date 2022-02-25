@@ -1,7 +1,7 @@
 import path from "path"
 import * as utils from "./utils"
 import * as express from "express"
-import * as database from "./database"
+import * as database from "./orm"
 import fileUpload from "express-fileupload"
 
 const router = express.Router()
