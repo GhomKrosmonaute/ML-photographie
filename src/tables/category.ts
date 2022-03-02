@@ -65,6 +65,12 @@ const category = new Table<Category>({
       .inTable("category")
       .onDelete("cascade")
   },
+  async then(table) {
+    if (await table.isEmpty()) {
+      const [id] = await table.query.insert({ name: "Privé" })
+      await table.query.insert({ name: "Sans catégorie", categoryId: id })
+    }
+  },
 })
 
 export default category
