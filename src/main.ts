@@ -7,7 +7,7 @@ import session from "express-session"
 import cookieParser from "cookie-parser"
 
 import router from "./app/router"
-import * as database from "./app/orm"
+import orm from "./app/orm"
 
 declare module "express-session" {
   interface SessionData {
@@ -50,17 +50,3 @@ app.locals.site = {
   url: process.env.ML_SITE_URL,
   backgrounds: {},
 }
-
-database
-  .table("site")
-  .select()
-  .then((config) => {
-    for (const entry of config) {
-      if (!entry.name.startsWith("background."))
-        app.locals.site[entry.name] = entry.value
-      else app.locals.site.backgrounds[entry.name.split(".")[1]] = entry.value
-    }
-
-    //console.log(app.locals.site)
-    console.log("Deployed to", app.locals.site.url)
-  })

@@ -1,12 +1,11 @@
 import * as express from "express"
-import * as database from "./orm"
+import photoTable, { Photo } from "../tables/photo"
 
 export async function fetchPhoto(
   req: express.Request,
   res: express.Response
-): Promise<null | Photography> {
-  const photo = await database
-    .table("photo")
+): Promise<null | Photo> {
+  const photo = await photoTable.query
     .select()
     .where({ id: Number(req.params.id) })
     .first()
@@ -21,4 +20,20 @@ export async function fetchPhoto(
   }
 
   return photo
+}
+
+export const adminOnly: express.RequestHandler = (req, res, next) => {
+  if (process.env.ML_DEV) {
+    req.session.admin = true
+    next()
+    return
+  }
+
+  if (!req.session.admin)
+    return res.status(401).render("Error", {
+      code: 401,
+      message: "Vous devez être connecté en tant qu'administrateur.",
+    })
+
+  next()
 }

@@ -10,10 +10,16 @@ if (!fs.existsSync(dataDirectory)) fs.mkdirSync(dataDirectory)
  * Welcome to the database file!
  * You can get the docs of **knex** [here](http://knexjs.org/)
  */
-
-export const orm = new ORM(
+const orm = new ORM(
   {
-    verbose: true,
+    logger: {
+      log: (message) => {
+        console.log(message)
+      },
+      error: (message) => {
+        console.error(message)
+      },
+    },
     tablePath: path.join(process.cwd(), "dist", "tables"),
   },
   {
@@ -24,3 +30,7 @@ export const orm = new ORM(
     },
   }
 )
+
+orm.load().then(() => console.log("Loaded tables"))
+
+export default orm

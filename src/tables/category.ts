@@ -1,8 +1,8 @@
-import { orm } from "../app/orm"
+import orm from "../app/orm"
 import { Table } from "@ghom/orm"
 import photo, { Photo } from "./photo"
 
-export function categoryNames(): Promise<
+export function fetchCategoryNames(): Promise<
   {
     parentName: string
     name: string
