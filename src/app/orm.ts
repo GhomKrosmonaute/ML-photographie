@@ -12,14 +12,6 @@ if (!fs.existsSync(dataDirectory)) fs.mkdirSync(dataDirectory)
  */
 const orm = new ORM(
   {
-    logger: {
-      log: (message) => {
-        console.log(message)
-      },
-      error: (message) => {
-        console.error(message)
-      },
-    },
     tablePath: path.join(process.cwd(), "dist", "tables"),
   },
   {
@@ -31,6 +23,10 @@ const orm = new ORM(
   }
 )
 
-orm.load().then(() => console.log("Loaded tables"))
+orm.on("load", (filepath) =>
+  console.log("Loaded table " + path.relative(process.cwd(), filepath))
+)
+
+orm.init().catch()
 
 export default orm

@@ -8,22 +8,24 @@ const routeHandler = new handler.Handler(
   path.join(process.cwd(), "dist", "routes")
 )
 
-routeHandler.on("finish", async (files) => {
+routeHandler.on("load", (filepath) => {
+  console.log("Loaded route " + path.relative(process.cwd(), filepath))
+})
+
+routeHandler.once("finish", async (files) => {
   for (const filepath of files) {
     const extension = require(filepath)
     router.use(extension.default)
   }
-})
 
-routeHandler.load().then(() => {
   router.use((req, res, next) => {
     res.status(404).render("Error", {
       code: 404,
       message: "Cette page est inexistante !",
     })
   })
-
-  console.log("Loaded routes")
 })
+
+routeHandler.load().catch()
 
 export default router

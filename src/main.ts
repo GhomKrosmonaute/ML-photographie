@@ -6,8 +6,8 @@ import express from "express"
 import session from "express-session"
 import cookieParser from "cookie-parser"
 
+import "./app/orm"
 import router from "./app/router"
-import orm from "./app/orm"
 
 declare module "express-session" {
   interface SessionData {
